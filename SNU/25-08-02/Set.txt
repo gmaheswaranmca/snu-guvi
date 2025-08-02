@@ -1,0 +1,23 @@
+#001
+Find All Subsets of an Array
+- Given an array, return all possible subsets (the power set)
+- Medium
+- LeetCode, Amazon
+
+---
+
+#002
+"Two Sum", 
+"Given an array of integers, return indices of the two numbers such that they add up to a specific target.", 
+"Easy", 
+"LeetCode, Amazon, Microsoft"
+
+---
+
+#003
+
+"Longest Increasing Subsequence", 
+"Given an array of integers, find the length of the longest strictly increasing subsequence.", 
+"Medium", 
+"LeetCode, Amazon, Microsoft"
+

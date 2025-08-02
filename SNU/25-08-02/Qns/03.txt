@@ -1,0 +1,73 @@
+"Longest Increasing Subsequence", 
+"Given an array of integers, find the length of the longest strictly increasing subsequence.", 
+"Medium", 
+"LeetCode, Amazon, Microsoft"
+
+---
+
+Problem Title: Longest Increasing Subsequence
+
+Problem Description:
+Given an array of integers, find the length of the longest strictly increasing subsequence. A subsequence is a sequence that can be derived from the array by deleting some or no elements without changing the order of the remaining elements. The subsequence must be strictly increasing, meaning each subsequent element is greater than the previous one.
+
+Input Format:
+- The first line contains an integer n, the number of elements in the array.
+- The second line contains n space-separated integers, representing the elements of the array.
+
+Output Format:
+- Print a single integer, the length of the longest strictly increasing subsequence.
+
+Constraints:
+- 1 <= n <= 2500
+- -10^4 <= array[i] <= 10^4
+
+Sample Input:
+8
+10 9 2 5 3 7 101 18
+
+Sample Output:
+4
+
+Explanation:
+The longest increasing subsequence is [2, 3, 7, 101], which has length 4.
+
+Difficulty:
+Medium
+
+Five Test Cases:
+Test Case 1:
+Input:
+6
+1 3 2 4 5 6
+Output:
+5
+
+Test Case 2:
+Input:
+5
+5 4 3 2 1
+Output:
+1
+
+Test Case 3:
+Input:
+7
+2 2 2 2 2 2 2
+Output:
+1
+
+Test Case 4:
+Input:
+10
+1 2 3 4 5 6 7 8 9 10
+Output:
+10
+
+Test Case 5:
+Input:
+9
+9 8 7 1 2 3 4 5 6
+Output:
+6
+
+---
