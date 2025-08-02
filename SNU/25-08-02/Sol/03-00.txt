@@ -1,0 +1,27 @@
+Solution Techniques for Longest Increasing Subsequence (LIS):
+
+1. Dynamic Programming (O(n^2) time, O(n) space):
+    - Maintain a dp[] array where dp[i] is the length of the LIS ending at index i.
+    - For each i from 0 to n-1, check all j < i. If arr[j] < arr[i], update dp[i] = max(dp[i], dp[j] + 1).
+    - The answer is max(dp[i]) for all i.
+    - Simple to implement, but slower for large n.
+
+2. Patience Sorting / Binary Search (O(n log n) time, O(n) space):
+    - Maintain a tails[] array: tails[i] is the smallest tail of all increasing subsequences of length i+1.
+    - For each number, use binary search to find its position in tails and update.
+    - The length of tails is the answer.
+    - Efficient for large n, but does not reconstruct the actual subsequence.
+
+3. Recursive with Memoization (Top-Down DP):
+    - Define a recursive function f(i, prev) that returns the LIS length starting from index i with previous element prev.
+    - Use memoization to cache results.
+    - Not as efficient as iterative DP, but useful for understanding the problem.
+
+4. Segment Tree / Fenwick Tree (for range queries, advanced):
+    - Useful if the problem is modified to support updates or queries on the array.
+    - Not typically used for the basic LIS problem, but can be applied in variants.
+
+5. Reconstructing the Actual Subsequence:
+    - While using DP or patience sorting, maintain a predecessor array to reconstruct the LIS.
+    - Backtrack from the index with the maximum dp value or from the tails array.
+

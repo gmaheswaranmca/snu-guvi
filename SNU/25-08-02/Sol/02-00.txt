@@ -1,0 +1,29 @@
+Solution Techniques for "Two Sum":
+
+1. Brute Force Approach:
+    - Iterate over all pairs of indices (i, j) where i < j.
+    - For each pair, check if nums[i] + nums[j] == target.
+    - If found, return the indices.
+    - Time Complexity: O(n^2)
+    - Space Complexity: O(1)
+    - Simple but inefficient for large arrays.
+
+2. Hash Map Approach (Optimal):
+    - Use a hash map to store each number and its index as you iterate.
+    - For each element nums[i], check if (target - nums[i]) exists in the hash map.
+    - If it exists, return [hash_map[target - nums[i]], i].
+    - Otherwise, add nums[i] and its index to the hash map.
+    - Time Complexity: O(n)
+    - Space Complexity: O(n)
+    - Efficient and commonly used.
+
+3. Sorting with Two Pointers (Not applicable for index-based output):
+    - Sort the array and use two pointers to find the pair.
+    - However, sorting changes indices, so extra work is needed to map back to original indices.
+    - Time Complexity: O(n log n) for sorting, O(n) for two pointers.
+    - Space Complexity: O(n) if storing original indices.
+    - Not recommended for this problem due to index requirements.
+
+4. Using Set (Only for existence, not indices):
+    - Use a set to check if (target - nums[i]) exists.
+    - Cannot retrieve indices directly, so not suitable for this problem.
