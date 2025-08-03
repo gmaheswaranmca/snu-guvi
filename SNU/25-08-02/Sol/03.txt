@@ -1,0 +1,185 @@
+
+Summary:
+- For most cases, use O(n log n) patience sorting/binary search for LIS length.
+- Use O(n^2) DP for simplicity or when n is small.
+- Use memoization or advanced data structures for variants or extensions.
+
+---
+
+# Python solution for Longest Increasing Subsequence using Dynamic Programming (O(n^2) time, O(n) space)
+```
+def longest_increasing_subsequence(arr):
+    n = len(arr)
+    if n == 0:
+        return 0
+    dp = [1] * n
+    for i in range(n):
+        for j in range(i):
+            if arr[j] < arr[i]:
+                dp[i] = max(dp[i], dp[j] + 1)
+    return max(dp)
+
+if __name__ == "__main__":
+    n = int(input())
+    arr = list(map(int, input().split()))
+    print(longest_increasing_subsequence(arr))
+```
+
+---
+# Python solution for Longest Increasing Subsequence using Patience Sorting / Binary Search (O(n log n) time, O(n) space)
+import bisect
+
+def longest_increasing_subsequence(arr):
+    tails = []
+    for num in arr:
+        idx = bisect.bisect_left(tails, num)
+        if idx == len(tails):
+            tails.append(num)
+        else:
+            tails[idx] = num
+    return len(tails)
+
+if __name__ == "__main__":
+    n = int(input())
+    arr = list(map(int, input().split()))
+    print(longest_increasing_subsequence(arr))
+
+---
+# Python solution for Longest Increasing Subsequence using Recursive with Memoization (Top-Down DP)
+from functools import lru_cache
+
+def longest_increasing_subsequence(arr):
+    n = len(arr)
+    @lru_cache(maxsize=None)
+    def lis(i, prev_idx):
+        if i == n:
+            return 0
+        take = 0
+        if prev_idx == -1 or arr[i] > arr[prev_idx]:
+            take = 1 + lis(i + 1, i)
+        skip = lis(i + 1, prev_idx)
+        return max(take, skip)
+    return lis(0, -1)
+
+if __name__ == "__main__":
+    n = int(input())
+    arr = list(map(int, input().split()))
+    print(longest_increasing_subsequence(arr))
+
+---
+
+# Python solution for Longest Increasing Subsequence using Fenwick Tree (Binary Indexed Tree)
+class FenwickTree:
+    def __init__(self, size):
+        self.n = size + 2
+        self.tree = [0] * self.n
+
+    def update(self, idx, value):
+        idx += 1
+        while idx < self.n:
+            self.tree[idx] = max(self.tree[idx], value)
+            idx += idx & -idx
+
+    def query(self, idx):
+        idx += 1
+        res = 0
+        while idx > 0:
+            res = max(res, self.tree[idx])
+            idx -= idx & -idx
+        return res
+
+def longest_increasing_subsequence(arr):
+    # Coordinate compression
+    sorted_unique = sorted(set(arr))
+    idx_map = {v: i for i, v in enumerate(sorted_unique)}
+    ft = FenwickTree(len(sorted_unique))
+    for num in arr:
+        idx = idx_map[num]
+        best = ft.query(idx - 1)
+        ft.update(idx, best + 1)
+    return ft.query(len(sorted_unique) - 1)
+
+if __name__ == "__main__":
+    n = int(input())
+    arr = list(map(int, input().split()))
+    print(longest_increasing_subsequence(arr))
+
+---
+
+# Python solution for Longest Increasing Subsequence using Segment Tree
+
+class SegmentTree:
+    def __init__(self, size):
+        self.n = size
+        self.tree = [0] * (2 * size)
+
+    def update(self, idx, value):
+        idx += self.n
+        self.tree[idx] = max(self.tree[idx], value)
+        while idx > 1:
+            idx //= 2
+            self.tree[idx] = max(self.tree[2 * idx], self.tree[2 * idx + 1])
+
+    def query(self, l, r):
+        l += self.n
+        r += self.n
+        res = 0
+        while l < r:
+            if l % 2:
+                res = max(res, self.tree[l])
+                l += 1
+            if r % 2:
+                r -= 1
+                res = max(res, self.tree[r])
+            l //= 2
+            r //= 2
+        return res
+
+def longest_increasing_subsequence(arr):
+    # Coordinate compression
+    sorted_unique = sorted(set(arr))
+    idx_map = {v: i for i, v in enumerate(sorted_unique)}
+    st = SegmentTree(len(sorted_unique))
+    for num in arr:
+        idx = idx_map[num]
+        best = st.query(0, idx)
+        st.update(idx, best + 1)
+    return st.query(0, len(sorted_unique))
+
+if __name__ == "__main__":
+    n = int(input())
+    arr = list(map(int, input().split()))
+    print(longest_increasing_subsequence(arr))
+
+---
+
+# Python solution for reconstructing the actual Longest Increasing Subsequence (O(n^2) DP)
+
+def reconstruct_lis(arr):
+    n = len(arr)
+    if n == 0:
+        return []
+    dp = [1] * n
+    prev = [-1] * n
+    for i in range(n):
+        for j in range(i):
+            if arr[j] < arr[i] and dp[j] + 1 > dp[i]:
+                dp[i] = dp[j] + 1
+                prev[i] = j
+    # Find the index of the maximum value in dp
+    lis_length = max(dp)
+    idx = dp.index(lis_length)
+    # Reconstruct the sequence
+    lis = []
+    while idx != -1:
+        lis.append(arr[idx])
+        idx = prev[idx]
+    lis.reverse()
+    return lis
+
+if __name__ == "__main__":
+    n = int(input())
+    arr = list(map(int, input().split()))
+    lis = reconstruct_lis(arr)
+    print(len(lis))
+    print(*lis)

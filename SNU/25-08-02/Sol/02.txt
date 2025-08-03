@@ -1,0 +1,88 @@
+Summary:
+- Brute Force is simple but slow.
+- Hash Map is optimal and recommended.
+- Sorting/Two Pointers and Set approaches are not suitable due to index requirements.
+
+
+Brute Force Approach
+```
+def two_sum_brute_force(nums, target):
+    n = len(nums)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if nums[i] + nums[j] == target:
+                return i, j
+
+if __name__ == "__main__":
+    n = int(input())
+    nums = list(map(int, input().split()))
+    target = int(input())
+    i, j = two_sum_brute_force(nums, target)
+    print(i, j)
+```
+
+
+Hash Map Approach
+```
+def two_sum_hash_map(nums, target):
+    num_to_index = {}
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_to_index:
+            return num_to_index[complement], i
+        num_to_index[num] = i
+
+# Example usage:
+# n = int(input())
+# nums = list(map(int, input().split()))
+# target = int(input())
+# i, j = two_sum_hash_map(nums, target)
+# print(i, j)
+```
+
+
+Sorting with Two Pointers (Not applicable for index-based output)
+```
+def two_sum_sorting(nums, target):
+    # Store original indices
+    nums_with_indices = [(num, idx) for idx, num in enumerate(nums)]
+    # Sort by value
+    nums_with_indices.sort()
+    left, right = 0, len(nums_with_indices) - 1
+    while left < right:
+        total = nums_with_indices[left][0] + nums_with_indices[right][0]
+        if total == target:
+            # Return original indices
+            return nums_with_indices[left][1], nums_with_indices[right][1]
+        elif total < target:
+            left += 1
+        else:
+            right -= 1
+
+if __name__ == "__main__":
+    n = int(input())
+    nums = list(map(int, input().split()))
+    target = int(input())
+    i, j = two_sum_sorting(nums, target)
+    print(i, j)
+```
+
+
+
+Set (Only for existence, not indices)
+```
+def two_sum_set_exists(nums, target):
+    seen = set()
+    for num in nums:
+        if target - num in seen:
+            return True
+        seen.add(num)
+    return False
+
+# Example usage:
+# n = int(input())
+# nums = list(map(int, input().split()))
+# target = int(input())
+# exists = two_sum_set_exists(nums, target)
+# print("Exists" if exists else "Does not exist")
+```
