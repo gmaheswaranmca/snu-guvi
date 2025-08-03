@@ -1,0 +1,45 @@
+Solution Techniques:
+
+1. Greedy Algorithm (Earliest Finish Time First):
+    - Sort all activities by their end times in ascending order.
+    - Initialize a variable to keep track of the end time of the last selected activity (initially set to -infinity).
+    - Iterate through the sorted activities:
+      - If the start time of the current activity is greater than or equal to the end time of the last selected activity, select it and update the end time.
+    - This technique ensures the maximum number of non-overlapping activities are selected.
+    - Time Complexity: O(N log N) due to sorting.
+
+2. Dynamic Programming (Not optimal for this problem):
+    - For each activity, consider two choices: include or exclude the activity.
+    - Use DP to store the maximum number of activities that can be selected up to each activity.
+    - However, since activities can be sorted and greedily selected, DP is not efficient or necessary for this problem.
+
+3. Interval Scheduling Maximization (Classic Greedy):
+    - This is a well-known interval scheduling problem.
+    - The optimal solution is always to select the activity that finishes earliest (as in the greedy approach above).
+
+4. Brute Force (Inefficient):
+    - Try all possible subsets of activities and check for overlaps.
+    - Select the subset with the maximum number of non-overlapping activities.
+    - Time Complexity: O(2^N), not feasible for large N.
+
+
+# Time and Space Complexity Analysis of Discussed Techniques
+1. Greedy Algorithm (Earliest Finish Time First):
+    - Time Complexity: O(N log N) (due to sorting the activities by end time)
+    - Space Complexity: O(N) (for storing the list of activities)
+
+2. Interval Scheduling Maximization (Classic Greedy):
+    - Time Complexity: O(N log N) (sorting activities by end time)
+    - Space Complexity: O(N) (for storing the list of activities and optionally the selected activities)
+
+3. Dynamic Programming (Not optimal for this problem):
+    - Time Complexity: O(N^2) (if implemented, as for each activity, you may check all previous activities)
+    - Space Complexity: O(N) (for DP table)
+
+4. Brute Force:
+    - Time Complexity: O(2^N * N) (generates all subsets and checks each for overlaps)
+    - Space Complexity: O(N) (for storing activities and temporary subsets)
+
+---
+
+

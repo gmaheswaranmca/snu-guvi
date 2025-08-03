@@ -1,0 +1,27 @@
+"Activity Selection", 
+"Given start and end times of activities, select the maximum number of non-overlapping activities.", 
+"Easy", 
+"GeeksforGeeks, Google"
+
+---
+
+"Kth Largest Element in an Array", 
+"Find the kth largest element in an unsorted array using a heap.", 
+"Medium", 
+"LeetCode, Facebook, Amazon"
+
+---
+
+"Count Occurrences of Element", 
+"Given a sorted array and a target, use binary search to count the number of occurrences of the target.", 
+"Medium", 
+"Facebook, HackerEarth"
+
+---
+
+"Group Anagrams", 
+"Given an array of strings, group the anagrams together.", 
+"Medium", 
+"LeetCode, Google"
+   
+---

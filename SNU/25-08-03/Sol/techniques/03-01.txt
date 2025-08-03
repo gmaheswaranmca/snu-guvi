@@ -1,0 +1,27 @@
+Solution Techniques:
+
+1. **Binary Search for First and Last Occurrence**:
+    - Since the array is sorted, we can use binary search to find the first and last occurrence of the target.
+    - Steps:
+      - Use binary search to find the index of the first occurrence of the target.
+      - Use binary search to find the index of the last occurrence of the target.
+      - The count is (last index - first index + 1) if the target exists, else 0.
+    - Time Complexity: O(log N)
+    - Space Complexity: O(1)
+
+2. **Standard Library Functions (if allowed)**:
+    - In languages like C++ or Python, use `bisect_left` and `bisect_right` to find the insertion points.
+    - The count is (`bisect_right(arr, T)` - `bisect_left(arr, T)`).
+    - Time Complexity: O(log N)
+    - Space Complexity: O(1)
+
+3. **Linear Scan (Not Efficient for Large N)**:
+    - Iterate through the array and count occurrences.
+    - Time Complexity: O(N)
+    - Space Complexity: O(1)
+    - Not recommended due to constraints.
+
+
+---
+
+

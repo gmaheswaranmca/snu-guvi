@@ -1,0 +1,126 @@
+"Count Occurrences of Element", 
+"Given a sorted array and a target, use binary search to count the number of occurrences of the target.", 
+"Medium", 
+"Facebook, HackerEarth"
+
+---
+
+Problem Title: Count Occurrences of Element
+
+Problem Description:
+Given a sorted array of integers and a target value, determine how many times the target appears in the array. You must use a binary search approach to achieve an efficient solution.
+
+Input Format:
+- The first line contains an integer N, the number of elements in the array.
+- The second line contains N space-separated integers, representing the sorted array.
+- The third line contains an integer T, the target value to count.
+
+Output Format:
+- Print a single integer representing the number of times the target value appears in the array.
+
+Constraints:
+- 1 ≤ N ≤ 10^5
+- -10^9 ≤ Array elements ≤ 10^9
+- -10^9 ≤ T ≤ 10^9
+
+Sample Input 1:
+7
+1 2 2 2 3 4 5
+2
+
+Sample Output 1:
+3
+
+Explanation:
+The target value 2 appears three times in the array.
+
+Sample Input 2:
+5
+1 1 1 1 1
+1
+
+Sample Output 2:
+5
+
+Explanation:
+The target value 1 appears five times in the array.
+
+Sample Input 3:
+6
+1 2 3 4 5 6
+7
+
+Sample Output 3:
+0
+
+Explanation:
+The target value 7 does not appear in the array.
+
+Sample Input 4:
+8
+-5 -3 -3 0 0 0 2 4
+0
+
+Sample Output 4:
+3
+
+Explanation:
+The target value 0 appears three times in the array.
+
+Sample Input 5:
+10
+1 2 3 4 5 6 7 8 9 10
+5
+
+Sample Output 5:
+1
+
+Explanation:
+The target value 5 appears once in the array.
+
+Difficulty:
+Medium
+
+Five Test Cases:
+Test Case 1:
+Input:
+7
+1 2 2 2 3 4 5
+2
+Output:
+3
+
+Test Case 2:
+Input:
+5
+1 1 1 1 1
+1
+Output:
+5
+
+Test Case 3:
+Input:
+6
+1 2 3 4 5 6
+7
+Output:
+0
+
+Test Case 4:
+Input:
+8
+-5 -3 -3 0 0 0 2 4
+0
+Output:
+3
+
+Test Case 5:
+Input:
+10
+1 2 3 4 5 6 7 8 9 10
+5
+Output:
+1
+
+---
+
