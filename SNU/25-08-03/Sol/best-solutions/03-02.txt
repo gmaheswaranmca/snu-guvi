@@ -1,0 +1,1 @@
+**Recommended Approach**: Use binary search for first and last occurrence for optimal efficiency.

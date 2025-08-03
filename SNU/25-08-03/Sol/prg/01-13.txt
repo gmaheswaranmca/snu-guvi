@@ -1,0 +1,91 @@
+# Python solution using Brute Force (Inefficient)
+
+from itertools import combinations
+
+def is_non_overlapping(subset):
+    # Sort activities by start time
+    subset = sorted(subset, key=lambda x: x[0])
+    for i in range(1, len(subset)):
+        if subset[i][0] < subset[i-1][1]:
+            return False
+    return True
+
+def brute_force_max_activities(activities):
+    n = len(activities)
+    max_count = 0
+    # Try all possible subsets
+    for r in range(1, n+1):
+        for subset in combinations(activities, r):
+            if is_non_overlapping(subset):
+                max_count = max(max_count, r)
+    return max_count
+
+if __name__ == "__main__":
+    N = int(input())
+    activities = [tuple(map(int, input().split())) for _ in range(N)]
+    print(brute_force_max_activities(activities))
+
+---
+
+
+import java.util.*;
+
+public class Main {
+    // Check if a subset of activities is non-overlapping
+    static boolean isNonOverlapping(List<int[]> subset) {
+        subset.sort(Comparator.comparingInt(a -> a[0]));
+        for (int i = 1; i < subset.size(); i++) {
+            if (subset.get(i)[0] < subset.get(i - 1)[1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Brute force to find max number of non-overlapping activities
+    static int bruteForceMaxActivities(List<int[]> activities) {
+        int n = activities.size();
+        int maxCount = 0;
+        // Generate all possible subsets
+        for (int r = 1; r <= n; r++) {
+            List<List<int[]>> subsets = getCombinations(activities, r);
+            for (List<int[]> subset : subsets) {
+                if (isNonOverlapping(subset)) {
+                    maxCount = Math.max(maxCount, r);
+                }
+            }
+        }
+        return maxCount;
+    }
+
+    // Helper to generate all combinations of size r
+    static List<List<int[]>> getCombinations(List<int[]> activities, int r) {
+        List<List<int[]>> result = new ArrayList<>();
+        combineHelper(activities, r, 0, new ArrayList<>(), result);
+        return result;
+    }
+
+    static void combineHelper(List<int[]> activities, int r, int start, List<int[]> current, List<List<int[]>> result) {
+        if (current.size() == r) {
+            result.add(new ArrayList<>(current));
+            return;
+        }
+        for (int i = start; i < activities.size(); i++) {
+            current.add(activities.get(i));
+            combineHelper(activities, r, i + 1, current, result);
+            current.remove(current.size() - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<int[]> activities = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            int start = sc.nextInt();
+            int end = sc.nextInt();
+            activities.add(new int[]{start, end});
+        }
+        System.out.println(bruteForceMaxActivities(activities));
+    }
+}

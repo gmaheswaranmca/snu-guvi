@@ -1,0 +1,77 @@
+--- Quickselect Approach ---
+import random
+
+def quickselect(arr, k):
+    def select(left, right, k_smallest):
+        if left == right:
+            return arr[left]
+        pivot_index = random.randint(left, right)
+        arr[right], arr[pivot_index] = arr[pivot_index], arr[right]
+        store_index = left
+        for i in range(left, right):
+            if arr[i] > arr[right]:
+                arr[store_index], arr[i] = arr[i], arr[store_index]
+                store_index += 1
+        arr[right], arr[store_index] = arr[store_index], arr[right]
+        if store_index == k_smallest:
+            return arr[store_index]
+        elif store_index < k_smallest:
+            return select(store_index + 1, right, k_smallest)
+        else:
+            return select(left, store_index - 1, k_smallest)
+    return select(0, len(arr) - 1, k - 1)
+
+# Example usage:
+n, k = map(int, input().split())
+arr = list(map(int, input().split()))
+print(quickselect(arr, k))
+
+---
+
+--- Quickselect Approach (Java) ---
+import java.util.*;
+
+public class Quickselect {
+    public static int quickselect(int[] arr, int k) {
+        return select(arr, 0, arr.length - 1, k - 1);
+    }
+
+    private static int select(int[] arr, int left, int right, int kSmallest) {
+        if (left == right) {
+            return arr[left];
+        }
+        Random rand = new Random();
+        int pivotIndex = left + rand.nextInt(right - left + 1);
+        swap(arr, pivotIndex, right);
+        int storeIndex = left;
+        for (int i = left; i < right; i++) {
+            if (arr[i] > arr[right]) {
+                swap(arr, storeIndex, i);
+                storeIndex++;
+            }
+        }
+        swap(arr, storeIndex, right);
+        if (storeIndex == kSmallest) {
+            return arr[storeIndex];
+        } else if (storeIndex < kSmallest) {
+            return select(arr, storeIndex + 1, right, kSmallest);
+        } else {
+            return select(arr, left, storeIndex - 1, kSmallest);
+        }
+    }
+
+    private static void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), k = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
+        System.out.println(quickselect(arr, k));
+    }
+}
+---

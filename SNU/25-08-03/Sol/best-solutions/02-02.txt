@@ -1,0 +1,4 @@
+Recommended Approach:
+- For large n and small k, the min-heap method (O(n log k)) is efficient.
+- For average cases, Quickselect is fastest (O(n) expected).
+

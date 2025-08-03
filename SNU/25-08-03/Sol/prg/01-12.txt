@@ -1,0 +1,54 @@
+# Python solution using Interval Scheduling Maximization (Classic Greedy)
+
+def interval_scheduling_maximization(activities):
+    # Sort activities by their end time
+    activities.sort(key=lambda x: x[1])
+    selected = []
+    last_end = -float('inf')
+    for start, end in activities:
+        if start >= last_end:
+            selected.append((start, end))
+            last_end = end
+    return len(selected)
+
+if __name__ == "__main__":
+    N = int(input())
+    activities = [tuple(map(int, input().split())) for _ in range(N)]
+    print(interval_scheduling_maximization(activities))
+
+---
+
+/*
+Java solution using Interval Scheduling Maximization (Classic Greedy)
+*/
+
+import java.util.*;
+
+public class Main {
+    public static int intervalSchedulingMaximization(List<int[]> activities) {
+        // Sort activities by their end time
+        activities.sort(Comparator.comparingInt(a -> a[1]));
+        int count = 0;
+        int lastEnd = Integer.MIN_VALUE;
+        for (int[] activity : activities) {
+            int start = activity[0], end = activity[1];
+            if (start >= lastEnd) {
+                count++;
+                lastEnd = end;
+            }
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<int[]> activities = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            int start = sc.nextInt();
+            int end = sc.nextInt();
+            activities.add(new int[]{start, end});
+        }
+        System.out.println(intervalSchedulingMaximization(activities));
+    }
+}

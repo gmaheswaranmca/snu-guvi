@@ -1,0 +1,43 @@
+--- Max-Heap Approach ---
+import heapq
+
+def kth_largest_max_heap(arr, k):
+    max_heap = [-num for num in arr]
+    heapq.heapify(max_heap)
+    result = None
+    for _ in range(k):
+        result = -heapq.heappop(max_heap)
+    return result
+
+# Example usage:
+n, k = map(int, input().split())
+arr = list(map(int, input().split()))
+print(kth_largest_max_heap(arr, k))
+
+---
+
+--- Java PriorityQueue Approach ---
+import java.util.*;
+
+public class KthLargestMaxHeap {
+    public static int kthLargest(int[] arr, int k) {
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+        for (int num : arr) {
+            maxHeap.offer(num);
+        }
+        int result = -1;
+        for (int i = 0; i < k; i++) {
+            result = maxHeap.poll();
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), k = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
+        System.out.println(kthLargest(arr, k));
+    }
+}
+---

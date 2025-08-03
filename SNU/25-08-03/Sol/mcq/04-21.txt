@@ -1,0 +1,36 @@
+MCQ Questions:
+
+1. Which of the following is the most efficient way to group anagrams from a list of strings?
+    a) Compare each string with every other string
+    b) Use sorting-based hashing
+    c) Use brute force substring matching
+    d) Use regular expressions
+Answer: b) Use sorting-based hashing
+
+2. What is the time complexity of grouping anagrams using character count hashing for n strings of average length k?
+    a) O(n^2)
+    b) O(n * k)
+    c) O(n * k log k)
+    d) O(k^2)
+Answer: b) O(n * k)
+
+3. In sorting-based hashing, what is used as the key in the hash map?
+    a) The original string
+    b) The sorted string
+    c) The length of the string
+    d) The reverse of the string
+Answer: b) The sorted string
+
+4. Which data structure is commonly used to group strings with the same key in both techniques?
+    a) Stack
+    b) Queue
+    c) Hash map (dictionary)
+    d) Linked list
+Answer: c) Hash map (dictionary)
+
+5. For character count hashing, what is the space complexity for storing the groups?
+    a) O(n)
+    b) O(k)
+    c) O(n * k)
+    d) O(n^2)
+Answer: c) O(n * k)

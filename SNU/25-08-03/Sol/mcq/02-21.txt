@@ -1,0 +1,31 @@
+Product-Based Company MCQ Questions (with Answers):
+
+1. Which of the following techniques is most efficient on average for finding the kth largest element in an unsorted array?
+    a) Sorting
+    b) Min-Heap
+    c) Quickselect   <-- Answer
+    d) Max-Heap
+
+2. What is the worst-case time complexity of the Quickselect algorithm?
+    a) O(n)
+    b) O(n log n)
+    c) O(n^2)   <-- Answer
+    d) O(log n)
+
+3. If you use a min-heap of size k to find the kth largest element, what is the space complexity?
+    a) O(1)
+    b) O(k)   <-- Answer
+    c) O(n)
+    d) O(log k)
+
+4. Which technique is best suited when you need to repeatedly find the kth largest element after multiple insertions and deletions?
+    a) Sorting
+    b) Min-Heap
+    c) Quickselect
+    d) Max-Heap   <-- Answer
+
+5. Building a max-heap from an array of n elements takes:
+    a) O(n)   <-- Answer
+    b) O(n log n)
+    c) O(log n)
+    d) O(n^2)

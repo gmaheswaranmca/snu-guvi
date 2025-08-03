@@ -1,0 +1,50 @@
+# Technique 2: Character Count Hashing
+
+n = int(input())
+words = [input().strip() for _ in range(n)]
+
+from collections import defaultdict
+
+groups = defaultdict(list)
+for word in words:
+    count = [0] * 26
+    for c in word:
+        count[ord(c) - ord('a')] += 1
+    key = tuple(count)
+    groups[key].append(word)
+
+for group in groups.values():
+    print(' '.join(group))
+
+---
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        List<String> words = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            words.add(sc.nextLine().trim());
+        }
+
+        Map<String, List<String>> groups = new HashMap<>();
+        for (String word : words) {
+            int[] count = new int[26];
+            for (char c : word.toCharArray()) {
+                count[c - 'a']++;
+            }
+            StringBuilder keyBuilder = new StringBuilder();
+            for (int cnt : count) {
+                keyBuilder.append(cnt).append("#");
+            }
+            String key = keyBuilder.toString();
+            groups.computeIfAbsent(key, k -> new ArrayList<>()).add(word);
+        }
+
+        for (List<String> group : groups.values()) {
+            System.out.println(String.join(" ", group));
+        }
+    }
+}

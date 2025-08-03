@@ -1,0 +1,41 @@
+# Technique 1: Sorting-based Hashing
+
+n = int(input())
+words = [input().strip() for _ in range(n)]
+
+from collections import defaultdict
+
+groups = defaultdict(list)
+for word in words:
+    key = ''.join(sorted(word))
+    groups[key].append(word)
+
+for group in groups.values():
+    print(' '.join(group))
+
+---
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        List<String> words = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            words.add(sc.nextLine().trim());
+        }
+
+        Map<String, List<String>> groups = new HashMap<>();
+        for (String word : words) {
+            char[] chars = word.toCharArray();
+            Arrays.sort(chars);
+            String key = new String(chars);
+            groups.computeIfAbsent(key, k -> new ArrayList<>()).add(word);
+        }
+
+        for (List<String> group : groups.values()) {
+            System.out.println(String.join(" ", group));
+        }
+    }
+}

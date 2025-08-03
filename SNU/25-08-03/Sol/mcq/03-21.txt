@@ -1,0 +1,36 @@
+MCQ Questions:
+
+1. Which algorithm is most efficient for counting occurrences of a target in a sorted array?
+    a) Linear Scan  
+    b) Binary Search  
+    c) Hashing  
+    d) Brute Force  
+    **Answer:** b) Binary Search
+
+2. What is the time complexity of using binary search to find the first and last occurrence of a target in a sorted array?
+    a) O(N)  
+    b) O(log N)  
+    c) O(N log N)  
+    d) O(1)  
+    **Answer:** b) O(log N)
+
+3. In Python, which standard library functions can be used to count occurrences of a target in a sorted array?
+    a) bisect_left and bisect_right  
+    b) sort and count  
+    c) find and index  
+    d) search and locate  
+    **Answer:** a) bisect_left and bisect_right
+
+4. If the target does not exist in the array, what should be the count of its occurrences?
+    a) -1  
+    b) 0  
+    c) 1  
+    d) None  
+    **Answer:** b) 0
+
+5. Why is linear scan not recommended for large sorted arrays?
+    a) It uses extra space  
+    b) It is not accurate  
+    c) It has higher time complexity  
+    d) It requires sorting  
+    **Answer:** c) It has higher time complexity

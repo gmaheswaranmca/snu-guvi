@@ -1,0 +1,36 @@
+# Product-Based Companies MCQs Related to Activity Selection Problem
+
+1. Which algorithm provides the optimal solution for the activity selection problem?
+    a) Dynamic Programming
+    b) Greedy Algorithm
+    c) Brute Force
+    d) Backtracking
+    Answer: b) Greedy Algorithm
+
+2. What is the time complexity of the greedy solution for the activity selection problem?
+    a) O(N)
+    b) O(N^2)
+    c) O(N log N)
+    d) O(2^N)
+    Answer: c) O(N log N)
+
+3. In the greedy approach for activity selection, activities are sorted based on:
+    a) Start time
+    b) Duration
+    c) End time
+    d) Priority
+    Answer: c) End time
+
+4. Which of the following is NOT a valid reason for using greedy algorithms in activity selection?
+    a) They always provide the optimal solution
+    b) They are faster than brute force
+    c) They require more space than dynamic programming
+    d) They are easy to implement
+    Answer: c) They require more space than dynamic programming
+
+5. What is the main drawback of using brute force for the activity selection problem?
+    a) It is not accurate
+    b) It is too slow for large N
+    c) It requires sorting
+    d) It cannot find the optimal solution
+    Answer: b) It is too slow for large N

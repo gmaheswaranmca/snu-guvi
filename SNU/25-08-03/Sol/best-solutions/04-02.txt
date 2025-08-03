@@ -1,0 +1,1 @@
+Both techniques efficiently group anagrams. The sorting-based approach is simpler to implement, while the character count approach can be faster for longer strings.

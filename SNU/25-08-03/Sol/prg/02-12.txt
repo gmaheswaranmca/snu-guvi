@@ -1,0 +1,41 @@
+--- Min-Heap Approach ---
+import heapq
+
+def kth_largest_min_heap(arr, k):
+    min_heap = []
+    for num in arr:
+        heapq.heappush(min_heap, num)
+        if len(min_heap) > k:
+            heapq.heappop(min_heap)
+    return min_heap[0]
+
+# Example usage:
+n, k = map(int, input().split())
+arr = list(map(int, input().split()))
+print(kth_largest_min_heap(arr, k))
+
+---
+
+import java.util.PriorityQueue;
+import java.util.Scanner;
+
+public class KthLargestMinHeap {
+    public static int kthLargestMinHeap(int[] arr, int k) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        for (int num : arr) {
+            minHeap.offer(num);
+            if (minHeap.size() > k) {
+                minHeap.poll();
+            }
+        }
+        return minHeap.peek();
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), k = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
+        System.out.println(kthLargestMinHeap(arr, k));
+    }
+}
