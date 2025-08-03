@@ -44,6 +44,97 @@ if __name__ == "__main__":
     arr = list(map(int, input().split()))
     print(longest_increasing_subsequence(arr))
 
+```java
+import java.util.*;
+
+public class Main {
+
+    public static int longestIncreasingSubsequence(int[] arr) {
+        List<Integer> tails = new ArrayList<>();
+        
+        for (int num : arr) {
+            int idx = Collections.binarySearch(tails, num);
+            
+            // binarySearch returns (-(insertion point) - 1) if not found
+            if (idx < 0) {
+                idx = -idx - 1;
+            }
+            
+            if (idx == tails.size()) {
+                tails.add(num);
+            } else {
+                tails.set(idx, num);
+            }
+        }
+        return tails.size();
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();              // Number of elements
+        int[] arr = new int[n];           // Input array
+        
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        System.out.println(longestIncreasingSubsequence(arr));
+    }
+}
+```
+
+```java
+import java.util.*;
+
+public class Main {
+
+    public static int longestIncreasingSubsequence(int[] arr) {
+        int[] tails = new int[arr.length];
+        int size = 0;
+
+        for (int num : arr) {
+            int idx = binarySearch(tails, 0, size - 1, num);
+            if (idx == size) {
+                tails[size++] = num; // Append new pile
+            } else {
+                tails[idx] = num;    // Replace existing pile top
+            }
+        }
+
+        return size;
+    }
+
+    // Custom binary search to find the index of the first element >= target
+    private static int binarySearch(int[] tails, int left, int right, int target) {
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (tails[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left; // Insertion position
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();              // Number of elements
+        int[] arr = new int[n];           // Input array
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        System.out.println(longestIncreasingSubsequence(arr));
+    }
+}
+
+```
+
 ---
 # Python solution for Longest Increasing Subsequence using Recursive with Memoization (Top-Down DP)
 from functools import lru_cache
