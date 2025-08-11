@@ -1,0 +1,110 @@
+"3Sum", 
+"Given an array of integers, find all unique triplets that sum up to zero.", 
+"Medium", 
+"LeetCode, InterviewBit" 
+    3Sum: https://lnkd.in/gev7gEzS
+"Google, Facebook, Amazon, Microsoft" 
+
+---
+
+Problem Title:
+3Sum
+
+Problem Description:
+Given an array of integers, find all unique triplets in the array which give the sum of zero. Each triplet should be listed only once, and the order of the triplets does not matter.
+
+Input Format:
+- The first line contains an integer n, the number of elements in the array.
+- The second line contains n space-separated integers representing the elements of the array.
+
+Output Format:
+- Print each unique triplet that sums to zero on a separate line, with the numbers in each triplet separated by spaces and sorted in non-decreasing order.
+- The triplets themselves can be printed in any order.
+
+Constraints:
+- 3 ≤ n ≤ 10^3
+- -10^5 ≤ array[i] ≤ 10^5
+
+Sample Input:
+6
+-1 0 1 2 -1 -4
+
+Sample Output:
+-1 -1 2
+-1 0 1
+
+Explanation:
+There are two unique triplets that sum to zero: [-1, -1, 2] and [-1, 0, 1].
+
+Difficulty:
+Medium
+
+Five Test Cases:
+Test Case 1:
+Input:
+5
+0 0 0 0 0
+Output:
+0 0 0
+
+Test Case 2:
+Input:
+4
+1 2 3 4
+Output:
+
+Test Case 3:
+Input:
+7
+-2 0 1 1 2 -1 -4
+Output:
+-2 0 2
+-2 1 1
+-1 0 1
+
+Test Case 4:
+Input:
+3
+-1 -1 2
+Output:
+-1 -1 2
+
+Test Case 5:
+Input:
+8
+-1 0 1 2 -1 -4 -2 2
+Output:
+-2 0 2
+-1 -1 2
+-1 0 1
+
+---
+
+Solution Techniques for 3Sum:
+
+1. Brute Force (Triple Nested Loops)
+- Try every possible triplet (i, j, k) with i < j < k.
+- Check if nums[i] + nums[j] + nums[k] == 0.
+- Use a set to avoid duplicate triplets.
+- Time Complexity: O(n^3)
+- Space Complexity: O(n) (for storing results)
+
+2. Hashing (Two Sum for Each Element)
+- For each element nums[i], use a hash set to find pairs (j, k) such that nums[j] + nums[k] == -nums[i].
+- Use a set to avoid duplicates.
+- Time Complexity: O(n^2)
+- Space Complexity: O(n^2) (for storing results and hash set)
+
+3. Sorting + Two Pointers (Optimal)
+- Sort the array.
+- For each index i, use two pointers (left, right) to find pairs that sum to -nums[i].
+- Skip duplicates for i, left, and right.
+- Time Complexity: O(n^2)
+- Space Complexity: O(1) (excluding output)
+
+4. Counting/Hash Map (Specialized for Constraints)
+- Count occurrences of each number.
+- Iterate over all pairs (a, b), compute c = -(a + b), and check if c exists.
+- Handle duplicates carefully.
+- Time Complexity: O(n^2)
+- Space Complexity: O(n)
