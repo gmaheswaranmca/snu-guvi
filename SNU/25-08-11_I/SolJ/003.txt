@@ -1,0 +1,122 @@
+import java.util.*;
+
+public class LongestConsecutiveSequence {
+
+    // Solution using Sorting Approach
+    public static int longestConsecutiveSorting(int[] nums) {
+        if (nums.length == 0) return 0;
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) set.add(num);
+        List<Integer> list = new ArrayList<>(set);
+        Collections.sort(list);
+        int maxLen = 1, currLen = 1;
+        for (int i = 1; i < list.size(); i++) {
+            if (list.get(i) == list.get(i - 1) + 1) {
+                currLen++;
+                maxLen = Math.max(maxLen, currLen);
+            } else {
+                currLen = 1;
+            }
+        }
+        return maxLen;
+    }
+
+    // Solution using HashSet Approach (Optimal)
+    public static int longestConsecutiveHashSet(int[] nums) {
+        Set<Integer> numSet = new HashSet<>();
+        for (int num : nums) numSet.add(num);
+        int maxLen = 0;
+        for (int num : numSet) {
+            if (!numSet.contains(num - 1)) {
+                int curr = num, currLen = 1;
+                while (numSet.contains(curr + 1)) {
+                    curr++;
+                    currLen++;
+                }
+                maxLen = Math.max(maxLen, currLen);
+            }
+        }
+        return maxLen;
+    }
+
+    // Solution using Union-Find (Disjoint Set Union)
+    static class UnionFind {
+        Map<Integer, Integer> parent = new HashMap<>();
+        Map<Integer, Integer> size = new HashMap<>();
+
+        public UnionFind(int[] nums) {
+            for (int num : nums) {
+                parent.put(num, num);
+                size.put(num, 1);
+            }
+        }
+
+        public int find(int x) {
+            if (parent.get(x) != x) {
+                parent.put(x, find(parent.get(x)));
+            }
+            return parent.get(x);
+        }
+
+        public void union(int x, int y) {
+            int px = find(x), py = find(y);
+            if (px == py) return;
+            if (size.get(px) < size.get(py)) {
+                parent.put(px, py);
+                size.put(py, size.get(py) + size.get(px));
+            } else {
+                parent.put(py, px);
+                size.put(px, size.get(px) + size.get(py));
+            }
+        }
+    }
+
+    public static int longestConsecutiveUnionFind(int[] nums) {
+        if (nums.length == 0) return 0;
+        UnionFind uf = new UnionFind(nums);
+        Set<Integer> numSet = new HashSet<>();
+        for (int num : nums) numSet.add(num);
+        for (int num : nums) {
+            if (numSet.contains(num + 1)) {
+                uf.union(num, num + 1);
+            }
+        }
+        int max = 0;
+        for (int val : uf.size.values()) {
+            max = Math.max(max, val);
+        }
+        return max;
+    }
+
+    // Solution using Map-based Range Merging
+    public static int longestConsecutiveMapMerge(int[] nums) {
+        Map<Integer, Integer> numMap = new HashMap<>();
+        int maxLen = 0;
+        for (int num : nums) {
+            if (numMap.containsKey(num)) continue;
+            int left = numMap.getOrDefault(num - 1, 0);
+            int right = numMap.getOrDefault(num + 1, 0);
+            int currLen = left + 1 + right;
+            numMap.put(num, currLen);
+            maxLen = Math.max(maxLen, currLen);
+            numMap.put(num - left, currLen);
+            numMap.put(num + right, currLen);
+        }
+        return maxLen;
+    }
+
+    // Main method for input and output
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
+
+        // Uncomment the solution you want to use:
+
+        // System.out.println(longestConsecutiveSorting(arr));
+        // System.out.println(longestConsecutiveHashSet(arr));
+        // System.out.println(longestConsecutiveUnionFind(arr));
+        System.out.println(longestConsecutiveMapMerge(arr));
+    }
+}

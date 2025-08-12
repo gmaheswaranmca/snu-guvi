@@ -1,0 +1,53 @@
+-- arnab mandal
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        n=len(nums)
+        nums.sort()
+        solutions=[]
+        for i in range(n-2):
+            if nums[i]==nums[i-1] and i>0:
+                continue
+            start=i+1
+            end=n-1
+            while start<end:
+                sum=nums[i]+nums[start]+nums[end]
+                if sum==0:
+                    solutions.append([nums[i], nums[start], nums[end]])
+                    while start<end and nums[start]==nums[start+1]:
+                        start+=1
+                    while start<end and nums[end]==nums[end-1]:
+                        end-=1
+                    start+=1
+                    end-=1
+                else:
+                    if sum<0:
+                        start=start+1
+                    else:
+                        end=end-1
+        return solutions
+
+---
+
+int maxArea(int* height, int heightSize) {
+    int forward=0;
+    int backward=heightSize-1;
+    int max_area=0;
+    int h;
+    while (forward<backward){
+        if (height[backward]>height[forward]){
+            h=height[forward];
+        }
+        else{
+            h=height[backward];
+        }
+        if ((backward-forward)*h>max_area){
+            max_area=(backward-forward)*h;
+        }
+        if (height[forward] < height[backward]) {
+            forward++;
+        } else {
+            backward--;
+        }
+    }
+    return max_area;
+}

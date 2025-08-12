@@ -1,0 +1,28 @@
+Arrays / Two Pointers / Hashing
+
+"3Sum", 
+"Given an array of integers, find all unique triplets that sum up to zero.", 
+"Medium", 
+"LeetCode, InterviewBit" 
+    3Sum: https://lnkd.in/gev7gEzS
+"Google, Facebook, Amazon, Microsoft" 
+
+---
+
+ "Container With Most Water", 
+"Given n non-negative integers representing the heights of vertical lines, find two lines that together with the x-axis form a container, such that the container contains the most water.", 
+"Medium", 
+"LeetCode, HackerRank" 
+    Container With Most Water: https://lnkd.in/gY2vxRMn
+"Google, Amazon, Apple"
+
+---
+
+"Longest Consecutive Sequence", 
+"Given an unsorted array of integers, find the length of the longest consecutive elements sequence.", 
+"Hard", 
+"LeetCode, GeeksforGeeks"
+    Longest Consecutive Sequence: https://lnkd.in/gMWgaJhS
+"Google, Facebook, Amazon"
+
+---

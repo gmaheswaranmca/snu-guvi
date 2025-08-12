@@ -1,0 +1,177 @@
+ "Container With Most Water", 
+"Given n non-negative integers representing the heights of vertical lines, find two lines that together with the x-axis form a container, such that the container contains the most water.", 
+"Medium", 
+"LeetCode, HackerRank" 
+    Container With Most Water: https://lnkd.in/gY2vxRMn
+"Google, Amazon, Apple"
+
+---
+
+Best Option:
+The Two Pointer Approach is the optimal solution with O(n) time and O(1) space complexity.
+
+---
+
+# Brute Force Solution
+def max_area_brute_force(n, heights):
+    max_area = 0
+    for i in range(n):
+        for j in range(i + 1, n):
+            area = min(heights[i], heights[j]) * (j - i)
+            if area > max_area:
+                max_area = area
+    return max_area
+
+# Example usage:
+# n = int(input())
+# heights = list(map(int, input().split()))
+# print(max_area_brute_force(n, heights))
+
+---
+
+# Two Pointer Approach Solution
+def max_area_two_pointer(n, heights):
+    left = 0
+    right = n - 1
+    max_area = 0
+    while left < right:
+        area = min(heights[left], heights[right]) * (right - left)
+        if area > max_area:
+            max_area = area
+        if heights[left] < heights[right]:
+            left += 1
+        else:
+            right -= 1
+    return max_area
+
+# Example usage:
+# n = int(input())
+# heights = list(map(int, input().split()))
+# print(max_area_two_pointer(n, heights))
+
+---
+
+# Stack-Based Approach Solution (less common for this problem)
+def max_area_stack_based(n, heights):
+    stack = []
+    max_area = 0
+    for i in range(n):
+        while stack and heights[i] < heights[stack[-1]]:
+            top = stack.pop()
+            if stack:
+                width = i - stack[-1] - 1
+                area = min(heights[top], heights[stack[-1]]) * width
+                max_area = max(max_area, area)
+        stack.append(i)
+    # Check remaining pairs in stack
+    while len(stack) > 1:
+        top = stack.pop()
+        area = min(heights[top], heights[stack[-1]]) * (n - stack[-1] - 1)
+        max_area = max(max_area, area)
+    return max_area
+
+# Example usage:
+# n = int(input())
+# heights = list(map(int, input().split()))
+# print(max_area_stack_based(n, heights))
+
+---
+
+# MCQ Questions and Answers
+
+# Question 1
+Which of the following best describes the "Container With Most Water" problem?
+A) Find the maximum sum subarray in a list of integers.
+B) Find two lines that, together with the x-axis, form a container holding the most water.
+C) Find the minimum difference between any two elements in an array.
+D) Find the longest increasing subsequence in an array.
+
+
+
+# Question 2
+What is the time complexity of the brute force solution for the "Container With Most Water" problem?
+A) O(n)
+B) O(log n)
+C) O(n^2)
+D) O(1)
+
+
+# Question 3
+Which approach provides the optimal solution for the "Container With Most Water" problem?
+A) Brute Force
+B) Stack-Based Approach
+C) Two Pointer Approach
+D) Binary Search
+
+
+
+# Question 4
+In the two pointer approach, why do we move the pointer pointing to the shorter line?
+A) To increase the width between the lines
+B) To possibly find a taller line and increase the area
+C) To decrease the time complexity
+D) To sort the array
+
+
+# Question 5
+Given the input heights = [1,8,6,2,5,4,8,3,7], what is the maximum area of water the container can store?
+A) 56
+B) 49
+C) 64
+D) 36
+
+
+# Question 6
+What is the space complexity of the two pointer approach for this problem?
+A) O(n)
+B) O(n^2)
+C) O(1)
+D) O(log n)
+
+
+# Question 7
+Which of the following is NOT a valid constraint for the "Container With Most Water" problem?
+A) 2 ≤ n ≤ 10^5
+B) 0 ≤ ai ≤ 10^4
+C) n can be 1
+D) n is the number of vertical lines
+
+
+# Question 8
+Which companies are known to ask the "Container With Most Water" problem in interviews?
+A) Google, Amazon, Apple
+B) Facebook, Twitter, Netflix
+C) Microsoft, IBM, Oracle
+D) Infosys, TCS, Wipro
+
+
+# Question 9
+What does the area between two lines in the problem depend on?
+A) The sum of their heights
+B) The minimum of their heights and the distance between them
+C) The maximum of their heights and the distance between them
+D) The product of their indices
+
+
+# Question 10
+Which of the following is a less common approach for this problem?
+A) Brute Force
+B) Two Pointer
+C) Stack-Based
+D) Dynamic Programming
+
+---
+
+# 1. Answer: B
+# 2. Answer: C
+# 3.Answer: C
+# 4.Answer: B
+# 5.Answer: B
+# 6.Answer: C
+# 7.Answer: C
+# 8.Answer: A
+# 9.Answer: B
+# 10.Answer: C
+
+---
+

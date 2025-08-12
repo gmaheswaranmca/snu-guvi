@@ -1,0 +1,204 @@
+"3Sum", 
+"Given an array of integers, find all unique triplets that sum up to zero.", 
+"Medium", 
+"LeetCode, InterviewBit" 
+    3Sum: https://lnkd.in/gev7gEzS
+"Google, Facebook, Amazon, Microsoft" 
+
+---
+
+Best Option:
+The Sorting + Two Pointers approach is the best in practice. It is efficient (O(n^2)), easy to implement, and handles duplicates cleanly.
+
+---
+
+# Brute Force (Triple Nested Loops) Solution
+
+n = int(input())
+nums = list(map(int, input().split()))
+result = set()
+
+for i in range(n):
+    for j in range(i + 1, n):
+        for k in range(j + 1, n):
+            triplet = tuple(sorted([nums[i], nums[j], nums[k]]))
+            if sum(triplet) == 0:
+                result.add(triplet)
+
+for triplet in result:
+    print(' '.join(map(str, triplet)))
+
+---
+
+# Hashing (Two Sum for Each Element) Solution
+
+n = int(input())
+nums = list(map(int, input().split()))
+result = set()
+
+for i in range(n):
+    seen = set()
+    for j in range(i + 1, n):
+        complement = -nums[i] - nums[j]
+        if complement in seen:
+            triplet = tuple(sorted([nums[i], nums[j], complement]))
+            result.add(triplet)
+        seen.add(nums[j])
+
+for triplet in result:
+    print(' '.join(map(str, triplet)))
+
+---
+
+# Sorting + Two Pointers (Optimal) Solution
+
+n = int(input())
+nums = list(map(int, input().split()))
+nums.sort()
+result = set()
+
+for i in range(n):
+    if i > 0 and nums[i] == nums[i - 1]:
+        continue
+    left, right = i + 1, n - 1
+    while left < right:
+        total = nums[i] + nums[left] + nums[right]
+        if total == 0:
+            result.add((nums[i], nums[left], nums[right]))
+            left += 1
+            right -= 1
+            while left < right and nums[left] == nums[left - 1]:
+                left += 1
+            while left < right and nums[right] == nums[right + 1]:
+                right -= 1
+        elif total < 0:
+            left += 1
+        else:
+            right -= 1
+
+for triplet in result:
+    print(' '.join(map(str, triplet)))
+
+---
+
+from collections import Counter
+
+n = int(input())
+nums = list(map(int, input().split()))
+count = Counter(nums)
+result = set()
+unique = sorted(count)
+
+for i in range(len(unique)):
+    a = unique[i]
+    for j in range(i, len(unique)):
+        b = unique[j]
+        c = -a - b
+        if c < b:
+            continue
+        if c not in count:
+            continue
+        # Check counts for duplicates
+        if a == b == c and count[a] >= 3:
+            result.add((a, b, c))
+        elif a == b and a != c and count[a] >= 2:
+            result.add((a, b, c))
+        elif b == c and a != b and count[b] >= 2:
+            result.add((a, b, c))
+        elif a != b and b != c and a != c:
+            result.add((a, b, c))
+
+for triplet in result:
+    print(' '.join(map(str, triplet)))
+
+---
+
+# Multiple Choice Questions (MCQs) on 3Sum Problem
+
+# 1. Which of the following best describes the 3Sum problem?
+A) Find all pairs in an array that sum to zero.
+B) Find all unique triplets in an array that sum to zero.
+C) Find the maximum sum of three numbers in an array.
+D) Find all subsets of size three in an array.
+
+
+
+# 2. What is the time complexity of the optimal Sorting + Two Pointers solution for 3Sum?
+A) O(n)
+B) O(n^2)
+C) O(n^3)
+D) O(log n)
+
+
+# 3. Why do we sort the array before applying the two pointers technique in the 3Sum problem?
+A) To reduce space complexity
+B) To make it easier to skip duplicates and use two pointers efficiently
+C) To increase the number of triplets found
+D) Sorting is not necessary
+
+
+# 4. Which data structure is commonly used to avoid duplicate triplets in the brute force solution?
+A) List
+B) Set
+C) Queue
+D) Stack
+
+
+# 5. If the input array is [0, 0, 0, 0, 0], how many unique triplets sum to zero?
+A) 0
+B) 1
+C) 3
+D) 10
+
+
+# 6. What is the main drawback of the brute force approach for 3Sum?
+A) It cannot find all triplets
+B) It is difficult to implement
+C) It has high time complexity (O(n^3))
+D) It uses too much extra space
+
+
+# 7. Which of the following companies is known to ask the 3Sum problem in interviews?
+A) Google
+B) Facebook
+C) Amazon
+D) All of the above
+
+
+
+# 8. In the hashing-based solution, what is the purpose of the hash set?
+A) To store the input array
+B) To store seen elements for two sum lookup
+C) To sort the array
+D) To count the number of triplets
+
+
+
+# 9. What is the space complexity of the optimal Sorting + Two Pointers solution (excluding output)?
+A) O(1)
+B) O(n)
+C) O(n^2)
+D) O(log n)
+
+
+
+# 10. Which of the following is NOT a valid constraint for the 3Sum problem as described?
+A) 3 ≤ n ≤ 10^3
+B) -10^5 ≤ array[i] ≤ 10^5
+C) The array is always sorted
+D) Each triplet must be unique
+
+---
+
+# 1. Answer: B
+# 2. Answer: B
+# 3. Answer: B
+# 4. Answer: B
+# 5. Answer: B
+# 6. Answer: C
+# 7. Answer: D
+# 8. Answer: B
+# 9. Answer: A
+# 10. Answer: C
+
+---

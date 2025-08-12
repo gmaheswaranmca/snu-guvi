@@ -1,0 +1,191 @@
+"Longest Consecutive Sequence", 
+"Given an unsorted array of integers, find the length of the longest consecutive elements sequence.", 
+"Hard", 
+"LeetCode, GeeksforGeeks"
+    Longest Consecutive Sequence: https://lnkd.in/gMWgaJhS
+"Google, Facebook, Amazon"
+
+---
+
+Best Option:
+- The HashSet approach is the best due to its simplicity, efficiency (O(n) time and space), and ease of implementation.
+
+---
+
+# Solution using Sorting Approach
+
+def longest_consecutive_sorting(nums):
+    if not nums:
+        return 0
+    nums = list(set(nums))  # Remove duplicates
+    nums.sort()
+    max_len = 1
+    curr_len = 1
+    for i in range(1, len(nums)):
+        if nums[i] == nums[i-1] + 1:
+            curr_len += 1
+            max_len = max(max_len, curr_len)
+        else:
+            curr_len = 1
+    return max_len
+
+# Input reading
+n = int(input())
+arr = list(map(int, input().split()))
+print(longest_consecutive_sorting(arr))
+
+---
+
+# Solution using HashSet Approach (Optimal)
+
+def longest_consecutive_hashset(nums):
+    num_set = set(nums)
+    max_len = 0
+    for num in num_set:
+        if num - 1 not in num_set:  # Start of a sequence
+            curr = num
+            curr_len = 1
+            while curr + 1 in num_set:
+                curr += 1
+                curr_len += 1
+            max_len = max(max_len, curr_len)
+    return max_len
+
+# Input reading
+n = int(input())
+arr = list(map(int, input().split()))
+print(longest_consecutive_hashset(arr))
+
+---
+
+# Solution using Union-Find (Disjoint Set Union)
+
+class UnionFind:
+    def __init__(self, nums):
+        self.parent = {}
+        self.size = {}
+        for num in nums:
+            self.parent[num] = num
+            self.size[num] = 1
+
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+
+    def union(self, x, y):
+        px, py = self.find(x), self.find(y)
+        if px == py:
+            return
+        if self.size[px] < self.size[py]:
+            self.parent[px] = py
+            self.size[py] += self.size[px]
+        else:
+            self.parent[py] = px
+            self.size[px] += self.size[py]
+
+def longest_consecutive_union_find(nums):
+    if not nums:
+        return 0
+    uf = UnionFind(nums)
+    num_set = set(nums)
+    for num in nums:
+        if num + 1 in num_set:
+            uf.union(num, num + 1)
+    return max(uf.size.values())
+
+# Input reading
+n = int(input())
+arr = list(map(int, input().split()))
+print(longest_consecutive_union_find(arr))
+
+---
+
+# Solution using Map-based Range Merging
+
+def longest_consecutive_map_merge(nums):
+    num_map = {}
+    max_len = 0
+    for num in nums:
+        if num in num_map:
+            continue
+        left = num_map.get(num - 1, 0)
+        right = num_map.get(num + 1, 0)
+        curr_len = left + 1 + right
+        num_map[num] = curr_len
+        max_len = max(max_len, curr_len)
+        # Update the boundaries
+        num_map[num - left] = curr_len
+        num_map[num + right] = curr_len
+    return max_len
+
+# Input reading
+n = int(input())
+arr = list(map(int, input().split()))
+print(longest_consecutive_map_merge(arr))
+
+---
+
+# Multiple Choice Questions (MCQs) on "Longest Consecutive Sequence" Problem
+
+1. Which data structure allows you to find the length of the longest consecutive sequence in O(n) time?
+A) Array  
+B) HashSet  
+C) Stack  
+D) Queue  
+
+2. What is the main reason the sorting approach is not optimal for this problem?
+A) It uses extra space  
+B) It cannot handle negative numbers  
+C) Its time complexity is O(n log n)  
+D) It does not remove duplicates  
+
+3. In the HashSet approach, why do we check if (num - 1) is not in the set before starting to count a sequence?
+A) To avoid counting duplicates  
+B) To ensure we only start from the beginning of a sequence  
+C) To reduce space complexity  
+D) To sort the numbers  
+
+4. What is the worst-case space complexity of the HashSet approach?
+A) O(1)  
+B) O(log n)  
+C) O(n)  
+D) O(n^2)  
+
+5. Which of the following is NOT a valid solution technique for the Longest Consecutive Sequence problem?
+A) HashSet  
+B) Sorting  
+C) Binary Search Tree  
+D) Union-Find  
+
+6. If the input array is [100, 4, 200, 1, 3, 2, 101], what is the length of the longest consecutive sequence?
+A) 2  
+B) 3  
+C) 4  
+D) 5  
+
+7. What is the main advantage of the Union-Find approach for this problem?
+A) It sorts the array  
+B) It merges consecutive numbers efficiently  
+C) It uses less space than HashSet  
+D) It is easier to implement  
+
+8. Which company is known to have asked this problem in interviews?
+A) Google  
+B) Infosys  
+C) TCS  
+D) Wipro  
+
+---
+
+# Answers
+
+1. B) HashSet  
+2. C) Its time complexity is O(n log n)  
+3. B) To ensure we only start from the beginning of a sequence  
+4. C) O(n)  
+5. C) Binary Search Tree  
+6. C) 4  
+7. B) It merges consecutive numbers efficiently  
+8. A) Google  
+

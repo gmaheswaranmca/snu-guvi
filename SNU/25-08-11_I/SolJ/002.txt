@@ -1,0 +1,68 @@
+public class MaxAreaSolutions {
+
+    // Brute Force Solution
+    public static int maxAreaBruteForce(int n, int[] heights) {
+        int maxArea = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int area = Math.min(heights[i], heights[j]) * (j - i);
+                if (area > maxArea) {
+                    maxArea = area;
+                }
+            }
+        }
+        return maxArea;
+    }
+
+    // Two Pointer Approach Solution
+    public static int maxAreaTwoPointer(int n, int[] heights) {
+        int left = 0;
+        int right = n - 1;
+        int maxArea = 0;
+        while (left < right) {
+            int area = Math.min(heights[left], heights[right]) * (right - left);
+            if (area > maxArea) {
+                maxArea = area;
+            }
+            if (heights[left] < heights[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return maxArea;
+    }
+
+    // Stack-Based Approach Solution (less common for this problem)
+    public static int maxAreaStackBased(int n, int[] heights) {
+        java.util.Stack<Integer> stack = new java.util.Stack<>();
+        int maxArea = 0;
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() && heights[i] < heights[stack.peek()]) {
+                int top = stack.pop();
+                if (!stack.isEmpty()) {
+                    int width = i - stack.peek() - 1;
+                    int area = Math.min(heights[top], heights[stack.peek()]) * width;
+                    maxArea = Math.max(maxArea, area);
+                }
+            }
+            stack.push(i);
+        }
+        // Check remaining pairs in stack
+        while (stack.size() > 1) {
+            int top = stack.pop();
+            int area = Math.min(heights[top], heights[stack.peek()]) * (n - stack.peek() - 1);
+            maxArea = Math.max(maxArea, area);
+        }
+        return maxArea;
+    }
+
+    // Example usage:
+    public static void main(String[] args) {
+        int[] heights = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+        int n = heights.length;
+        System.out.println(maxAreaBruteForce(n, heights));
+        System.out.println(maxAreaTwoPointer(n, heights));
+        System.out.println(maxAreaStackBased(n, heights));
+    }
+}
