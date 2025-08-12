@@ -1,0 +1,109 @@
+"Coin Change", 
+"Given coins of different denominations and a total amount, compute the fewest number of coins needed to make up that amount.", 
+"Medium", 
+"LeetCode, HackerRank"
+"Amazon, Google, Apple"
+
+---
+
+Problem Title:
+Coin Change
+
+Problem Description:
+You are given an integer array `coins` representing coins of different denominations and an integer `amount` representing a total amount of money. Write a program to compute the fewest number of coins needed to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
+
+Input Format:
+- The first line contains an integer `n`, the number of coin denominations.
+- The second line contains `n` space-separated integers representing the coin denominations.
+- The third line contains an integer `amount`, the total amount to make.
+
+Output Format:
+- Output a single integer: the minimum number of coins needed to make up the amount, or -1 if it is not possible.
+
+Constraints:
+- 1 <= n <= 12
+- 1 <= coins[i] <= 10^4
+- 0 <= amount <= 10^4
+- All coin denominations are positive integers.
+
+Sample Input:
+3
+1 2 5
+11
+
+Sample Output:
+3
+
+Explanation:
+The minimum number of coins needed to make 11 is 3 (11 = 5 + 5 + 1).
+
+Difficulty:
+Medium
+
+Five Test Cases:
+Test Case 1:
+Input:
+3
+1 2 5
+11
+Output:
+3
+
+Test Case 2:
+Input:
+2
+2 5
+3
+Output:
+-1
+
+Test Case 3:
+Input:
+1
+1
+0
+Output:
+0
+
+Test Case 4:
+Input:
+4
+1 3 4 5
+7
+Output:
+2
+
+Test Case 5:
+Input:
+2
+2 3
+7
+Output:
+3
+
+---
+
+Solution Techniques:
+
+1. Dynamic Programming (Bottom-Up, Tabulation):
+    - Build a dp array where dp[i] represents the minimum coins needed for amount i.
+    - For each coin, update dp[i] = min(dp[i], dp[i - coin] + 1).
+    - Time Complexity: O(n * amount), where n is the number of coins.
+    - Space Complexity: O(amount).
+
+2. Dynamic Programming (Top-Down, Memoization):
+    - Use recursion with memoization to compute the minimum coins for each sub-amount.
+    - Time Complexity: O(n * amount).
+    - Space Complexity: O(amount) for memoization stack.
+
+3. Breadth-First Search (BFS):
+    - Treat each amount as a node, and each coin as an edge to a new node (amount - coin).
+    - Use BFS to find the shortest path from amount to 0.
+    - Time Complexity: O(n * amount).
+    - Space Complexity: O(amount).
+
+4. Greedy:
+    - Try to use the largest coin first.
+    - Not guaranteed to work for all coin denominations (fails for non-canonical coin systems).
+    - Time Complexity: O(n).
+    - Space Complexity: O(1).

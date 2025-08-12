@@ -1,0 +1,112 @@
+"House Robber", 
+"Given an array representing the amount of money in each house, determine the maximum amount you can rob without alerting the police (cannot rob adjacent houses).", 
+"Medium", 
+"LeetCode, InterviewBit"
+"Amazon, Google, Facebook"
+
+---
+
+Problem Title:
+House Robber
+
+Problem Description:
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, represented by a non-negative integer array. However, adjacent houses have security systems connected, so robbing two directly adjacent houses will alert the police. Given the array of non-negative integers representing the amount of money in each house, determine the maximum amount of money you can rob tonight without alerting the police.
+
+Input Format:
+- The first line contains an integer n, the number of houses.
+- The second line contains n space-separated non-negative integers, where the i-th integer represents the amount of money in the i-th house.
+
+Output Format:
+- Print a single integer, the maximum amount of money you can rob without alerting the police.
+
+Constraints:
+- 1 ≤ n ≤ 100,000
+- 0 ≤ amount in each house ≤ 10,000
+
+Sample Input:
+6
+2 7 9 3 1 5
+
+Sample Output:
+17
+
+Explanation:
+Rob house 1 (2), house 3 (9), and house 6 (5), total = 2 + 9 + 5 = 16.
+Alternatively, rob house 2 (7), house 4 (3), and house 6 (5), total = 7 + 3 + 5 = 15.
+The optimal way is to rob house 2 (7), house 3 (9), and house 6 (5), total = 7 + 9 + 5 = 21, but since houses 2 and 3 are adjacent, this is not allowed.
+The correct maximum is robbing house 2 (7), house 4 (3), and house 6 (5), total = 7 + 3 + 5 = 15.
+But the best is robbing house 1 (2), house 3 (9), and house 5 (1), total = 2 + 9 + 1 = 12.
+Actually, the correct maximum is robbing house 2 (7), house 4 (3), and house 6 (5), total = 7 + 3 + 5 = 15.
+But with the input [2, 7, 9, 3, 1, 5], the maximum is 2 + 9 + 5 = 16.
+
+Difficulty:
+Medium
+
+Five Test Cases:
+Test Case 1:
+Input:
+4
+1 2 3 1
+Output:
+4
+
+Test Case 2:
+Input:
+5
+2 1 1 2 1
+Output:
+4
+
+Test Case 3:
+Input:
+1
+10
+Output:
+10
+
+Test Case 4:
+Input:
+7
+6 7 1 30 8 2 4
+Output:
+41
+
+Test Case 5:
+Input:
+8
+5 3 4 11 2 7 9 3
+Output:
+26
+
+---
+
+Solution Techniques:
+
+Solution 1: Recursive Solution (Brute Force)
+- Try every possibility: for each house, decide to rob it (and skip the next) or skip it.
+- Recurrence: maxRob(i) = max(maxRob(i+1), nums[i] + maxRob(i+2))
+- Time Complexity: O(2^n)
+- Space Complexity: O(n) (recursion stack)
+- Not feasible for large n due to exponential time.
+
+Solution 2: Top-Down Dynamic Programming (Memoization)
+- Use recursion with memoization to store results for each index.
+- Recurrence: same as above, but cache results.
+- Time Complexity: O(n)
+- Space Complexity: O(n) (memoization array + recursion stack)
+
+Solution 3: Bottom-Up Dynamic Programming (Tabulation)
+- Build a dp array where dp[i] = max money robbed from first i houses.
+- dp[0] = nums[0]
+- dp[1] = max(nums[0], nums[1])
+- For i >= 2: dp[i] = max(dp[i-1], dp[i-2] + nums[i])
+- Time Complexity: O(n)
+- Space Complexity: O(n)
+
+Solution 4: Space Optimized Dynamic Programming
+- Only keep track of last two results instead of full dp array.
+- Use two variables: prev1 (dp[i-1]), prev2 (dp[i-2])
+- For each house: curr = max(prev1, prev2 + nums[i])
+- Update prev2 = prev1, prev1 = curr
+- Time Complexity: O(n)
+- Space Complexity: O(1)
