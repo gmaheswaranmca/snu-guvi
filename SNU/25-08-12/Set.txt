@@ -12,16 +12,3 @@ Dynamic Programming (DP)
 "LeetCode, HackerRank"
 "Amazon, Google, Apple"
 
-Assignments 
-#
-"Climbing Stairs", 
-"Given n steps, each time you can climb 1 or 2 steps. Find how many distinct ways you can climb to the top.", 
-"Easy", 
-"LeetCode, GeeksforGeeks"
-"Amazon, Microsoft"
-
-"Longest Palindromic Substring", 
-"Given a string, find the longest palindromic substring.", 
-"Medium", 
-"LeetCode, GeeksforGeeks"
-"Amazon, Microsoft, Google"

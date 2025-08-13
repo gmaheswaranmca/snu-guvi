@@ -1,0 +1,139 @@
+"Climbing Stairs", 
+"Given n steps, each time you can climb 1 or 2 steps. Find how many distinct ways you can climb to the top.", 
+"Easy", 
+"LeetCode, GeeksforGeeks"
+"Amazon, Microsoft"
+
+---
+
+Best Option:
+- The space optimized dynamic programming approach is best, as it provides O(n) time and O(1) space complexity.
+
+---
+
+# Recursive Solution (Brute Force)
+def climbStairs(n):
+    if n == 0 or n == 1:
+        return 1
+    return climbStairs(n - 1) + climbStairs(n - 2)
+
+# Example usage:
+# n = int(input())
+# print(climbStairs(n))
+
+---
+
+# Recursive Solution with Memoization (Top-Down DP)
+def climbStairsMemo(n, memo=None):
+    if memo is None:
+        memo = {}
+    if n == 0 or n == 1:
+        return 1
+    if n in memo:
+        return memo[n]
+    memo[n] = climbStairsMemo(n - 1, memo) + climbStairsMemo(n - 2, memo)
+    return memo[n]
+
+# Example usage:
+# n = int(input())
+# print(climbStairsMemo(n))
+
+---
+
+# Dynamic Programming (Bottom-Up DP)
+def climbStairsDP(n):
+    if n == 0 or n == 1:
+        return 1
+    dp = [0] * (n + 1)
+    dp[0], dp[1] = 1, 1
+    for i in range(2, n + 1):
+        dp[i] = dp[i - 1] + dp[i - 2]
+    return dp[n]
+
+# Example usage:
+# n = int(input())
+# print(climbStairsDP(n))
+
+---
+
+# Space Optimized Dynamic Programming
+def climbStairsOptimized(n):
+    if n == 0 or n == 1:
+        return 1
+    prev2, prev1 = 1, 1
+    for _ in range(2, n + 1):
+        curr = prev1 + prev2
+        prev2, prev1 = prev1, curr
+    return prev1
+
+# Example usage:
+# n = int(input())
+# print(climbStairsOptimized(n))
+
+---
+
+# Multiple Choice Questions (MCQs)
+
+1. Which of the following best describes the time complexity of the optimal solution for the Climbing Stairs problem?
+A) O(n^2)
+B) O(2^n)
+C) O(n)
+D) O(1)
+
+2. In the Climbing Stairs problem, what does the value at dp[i] represent in the dynamic programming approach?
+A) The minimum steps to reach step i
+B) The number of distinct ways to reach step i
+C) The maximum steps to reach step i
+D) The number of jumps needed to reach step i
+
+3. Which of the following is true about the space optimized dynamic programming solution for the Climbing Stairs problem?
+A) It uses O(n) space
+B) It uses O(1) space
+C) It uses O(log n) space
+D) It uses O(n^2) space
+
+4. The Climbing Stairs problem is most similar to which well-known sequence?
+A) Arithmetic sequence
+B) Geometric sequence
+C) Fibonacci sequence
+D) Harmonic sequence
+
+5. If n = 5, how many distinct ways are there to climb to the top?
+A) 5
+B) 6
+C) 7
+D) 8
+
+6. Which of the following statements is correct regarding the recursive brute force solution for the Climbing Stairs problem?
+A) It is the most efficient solution
+B) It has exponential time complexity
+C) It uses constant space
+D) It does not use recursion
+
+7. What is the main advantage of using memoization in the recursive solution for the Climbing Stairs problem?
+A) Reduces space complexity
+B) Avoids redundant calculations
+C) Increases the number of recursive calls
+D) Makes the code harder to understand
+
+8. For n = 1, what is the output of the Climbing Stairs problem?
+A) 0
+B) 1
+C) 2
+D) 3
+
+---
+
+# Answers
+
+1. C) O(n)
+2. B) The number of distinct ways to reach step i
+3. B) It uses O(1) space
+4. C) Fibonacci sequence
+5. D) 8
+6. B) It has exponential time complexity
+7. B) Avoids redundant calculations
+8. B) 1
+
+---
+

@@ -1,0 +1,306 @@
+"Longest Palindromic Substring", 
+"Given a string, find the longest palindromic substring.", 
+"Medium", 
+"LeetCode, GeeksforGeeks"
+"Amazon, Microsoft, Google"
+
+---
+
+Best Option:
+- For practical purposes, "Expand Around Center" is simple, efficient, and easy to implement with O(n^2) time and O(1) space.
+- For optimal performance, "Manacher's Algorithm" achieves O(n) time but is more complex to implement.
+
+---
+
+# Brute Force Solution
+def longestPalindrome_brute_force(s):
+    n = len(s)
+    max_len = 0
+    start = 0
+    for i in range(n):
+        for j in range(i, n):
+            substr = s[i:j+1]
+            if substr == substr[::-1]:
+                if j - i + 1 > max_len:
+                    max_len = j - i + 1
+                    start = i
+    return s[start:start+max_len]
+
+# Example usage:
+# s = input().strip()
+# print(longestPalindrome_brute_force(s))
+
+---
+
+# Dynamic Programming Solution
+def longestPalindrome_dp(s):
+    n = len(s)
+    if n == 0:
+        return ""
+    dp = [[False]*n for _ in range(n)]
+    start = 0
+    max_len = 1
+    for i in range(n):
+        dp[i][i] = True
+    for i in range(n-1):
+        if s[i] == s[i+1]:
+            dp[i][i+1] = True
+            start = i
+            max_len = 2
+    for length in range(3, n+1):
+        for i in range(n-length+1):
+            j = i+length-1
+            if s[i] == s[j] and dp[i+1][j-1]:
+                dp[i][j] = True
+                start = i
+                max_len = length
+    return s[start:start+max_len]
+
+# Example usage:
+# s = input().strip()
+# print(longestPalindrome_dp(s))
+
+---
+
+# Expand Around Center Solution
+    Expand Around Center is a technique used to find palindromic substrings in a string. The idea is to consider each character (and the gap between each pair of characters) as the center of a possible palindrome, and then expand outward as long as the substring remains a palindrome.
+
+    How it works:
+    1. For each index in the string, treat it as the center of a palindrome.
+    2. Expand to the left and right as long as the characters match.
+    3. Do this for both odd-length (single character center) and even-length (two character center) palindromes.
+
+    Example in Python
+
+    ````python
+    def longestPalindrome_expand_center(s):
+        if not s:
+            return ""
+        start, end = 0, 0
+        for i in range(len(s)):
+            # Odd length palindrome
+            l1, r1 = expand(s, i, i)
+            # Even length palindrome
+            l2, r2 = expand(s, i, i + 1)
+            if r1 - l1 > end - start:
+                start, end = l1, r1
+            if r2 - l2 > end - start:
+                start, end = l2, r2
+        return s[start:end+1]
+
+    def expand(s, left, right):
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return left + 1, right - 1
+    ````
+
+    Key Points
+    - Time complexity: O(n²) in the worst case.
+    - Simple to implement and works well for moderate string lengths.
+    - Useful for finding the longest palindromic substring.
+
+def longestPalindrome_expand_center(s):
+    if not s or len(s) == 1:
+        return s
+
+    def expand_around_center(left, right):
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return left + 1, right - 1
+
+    start, end = 0, 0
+    for i in range(len(s)):
+        l1, r1 = expand_around_center(i, i)
+        l2, r2 = expand_around_center(i, i + 1)
+        if r1 - l1 > end - start:
+            start, end = l1, r1
+        if r2 - l2 > end - start:
+            start, end = l2, r2
+    return s[start:end + 1]
+
+# Example usage:
+# s = input().strip()
+# print(longestPalindrome_expand_center(s))
+
+---
+
+# Manacher's Algorithm Solution
+    Manacher's Algorithm is an efficient way to find the longest palindromic substring in a given string. It runs in linear time, O(n), which is much faster than the naive O(n²) approach.
+
+    High-Level Idea
+
+    1. Transform the string: Insert a special character (like `#`) between every character (and at the ends) to handle even-length palindromes uniformly.
+    2. Expand around centers: For each character in the transformed string, expand outward to find the length of the palindrome centered there.
+    3. Use previously computed information: Use symmetry and previously computed palindrome lengths to avoid unnecessary comparisons.
+
+    Key Variables
+
+    - `p[i]`: The radius of the palindrome centered at position `i` in the transformed string.
+    - `center`, `right`: The center and right edge of the current rightmost palindrome.
+    - `max_len`, `max_center`: Track the longest palindrome found.
+
+    Example Implementation
+
+    ````python
+    # Manacher's Algorithm to find the longest palindromic substring
+    def longestPalindrome_manacher(s):
+        # Transform s: add '#' between characters and at the ends
+        t = '#' + '#'.join(s) + '#'
+        n = len(t)
+        p = [0] * n
+        center = right = 0
+        max_len = max_center = 0
+
+        for i in range(n):
+            mirror = 2 * center - i
+            if i < right:
+                p[i] = min(right - i, p[mirror])
+            # Expand around center i
+            a, b = i + p[i] + 1, i - p[i] - 1
+            while a < n and b >= 0 and t[a] == t[b]:
+                p[i] += 1
+                a += 1
+                b -= 1
+            # Update center and right boundary
+            if i + p[i] > right:
+                center = i
+                right = i + p[i]
+            # Track the longest palindrome
+            if p[i] > max_len:
+                max_len = p[i]
+                max_center = i
+        # Extract the longest palindrome from the original string
+        start = (max_center - max_len) // 2
+        return s[start:start + max_len]
+    ````
+
+    Gotchas
+
+    - String transformation is crucial; without it, handling even-length palindromes is tricky.
+    - Indices in the transformed string must be mapped back to the original string.
+
+    Example
+
+    For `s = "babad"`, the function returns `"bab"` or `"aba"`.
+
+def longestPalindrome_manacher(s):
+    if not s:
+        return ""
+    # Preprocess the string to handle even length palindromes
+    t = '#' + '#'.join(s) + '#'
+    n = len(t)
+    p = [0] * n
+    center = 0
+    right = 0
+    max_len = 0
+    max_center = 0
+
+    for i in range(n):
+        mirror = 2 * center - i
+        if i < right:
+            p[i] = min(right - i, p[mirror])
+        # Expand around center i
+        a = i + p[i] + 1
+        b = i - p[i] - 1
+        while a < n and b >= 0 and t[a] == t[b]:
+            p[i] += 1
+            a += 1
+            b -= 1
+        # Update center and right boundary
+        if i + p[i] > right:
+            center = i
+            right = i + p[i]
+        # Track the longest palindrome
+        if p[i] > max_len:
+            max_len = p[i]
+            max_center = i
+    # Extract the longest palindrome from the original string
+    start = (max_center - max_len) // 2
+    return s[start:start + max_len]
+
+# Example usage:
+# s = input().strip()
+# print(longestPalindrome_manacher(s))
+
+---
+
+# MCQ Questions on Longest Palindromic Substring Problem
+
+1. Which of the following best describes a palindrome?
+    a) A string that contains only vowels  
+    b) A string that reads the same backward as forward  
+    c) A string with all unique characters  
+    d) A string with all identical characters  
+
+2. What is the time complexity of the brute force approach for finding the longest palindromic substring?
+    a) O(n)  
+    b) O(n^2)  
+    c) O(n^3)  
+    d) O(log n)  
+
+3. In the dynamic programming solution for the longest palindromic substring, what does dp[i][j] represent?
+    a) The length of the palindrome from i to j  
+    b) Whether the substring s[i:j+1] is a palindrome  
+    c) The number of palindromes in s[i:j+1]  
+    d) The starting index of the longest palindrome  
+
+4. Which technique is generally considered the simplest and most practical for moderate string lengths?
+    a) Brute Force  
+    b) Dynamic Programming  
+    c) Expand Around Center  
+    d) Manacher's Algorithm  
+
+5. What is the time complexity of Manacher's Algorithm for finding the longest palindromic substring?
+    a) O(n)  
+    b) O(n^2)  
+    c) O(n^3)  
+    d) O(log n)  
+
+6. Why is string transformation (inserting special characters) used in Manacher's Algorithm?
+    a) To increase the length of the string  
+    b) To handle both even and odd length palindromes uniformly  
+    c) To make the string lexicographically smaller  
+    d) To reduce the space complexity  
+
+7. Given the input string "cbbd", what is the output of the longest palindromic substring problem?
+    a) "c"  
+    b) "bb"  
+    c) "b"  
+    d) "bd"  
+
+8. Which of the following is NOT a valid approach to solve the longest palindromic substring problem?
+    a) Brute Force  
+    b) Dynamic Programming  
+    c) Sliding Window  
+    d) Manacher's Algorithm  
+
+9. What is the space complexity of the Expand Around Center approach?
+    a) O(1)  
+    b) O(n)  
+    c) O(n^2)  
+    d) O(log n)  
+
+10. For the input "forgeeksskeegfor", what is the longest palindromic substring?
+    a) "for"  
+    b) "geeksskeeg"  
+    c) "ss"  
+    d) "ee"  
+
+---
+
+# Answers:
+1. b  
+2. c  
+3. b  
+4. c  
+5. a  
+6. b  
+7. b  
+8. c  
+9. a  
+10. b  
+
+---
+
