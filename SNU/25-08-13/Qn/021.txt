@@ -1,0 +1,105 @@
+"Daily Temperatures", 
+"Given a list of daily temperatures, return a list such that for each day, tells you how many days you would have to wait until a warmer temperature.", 
+"Medium", 
+"LeetCode, InterviewBit"
+"Amazon, Google, Microsoft"
+
+---
+
+Problem Title:
+Daily Temperatures
+
+Problem Description:
+Given a list of daily temperatures, return a list such that, for each day in the input, tells you how many days you would have to wait until a warmer temperature. If there is no future day for which this is possible, put 0 instead.
+
+Input Format:
+- The first line contains an integer n, the number of days.
+- The second line contains n space-separated integers representing the daily temperatures.
+
+Output Format:
+- Output a single line with n space-separated integers, where the i-th integer is the number of days you have to wait after the i-th day to get a warmer temperature. If there is no such day, output 0 for that day.
+
+Constraints:
+- 1 <= n <= 10^5
+- 30 <= temperature[i] <= 100
+
+Sample Input:
+8
+73 74 75 71 69 72 76 73
+
+Sample Output:
+1 1 4 2 1 1 0 0
+
+Explanation:
+For day 1 (73), the next warmer temperature is 74, which occurs after 1 day.
+For day 2 (74), the next warmer temperature is 75, which occurs after 1 day.
+For day 3 (75), the next warmer temperature is 76, which occurs after 4 days.
+For day 4 (71), the next warmer temperature is 72, which occurs after 2 days.
+For day 5 (69), the next warmer temperature is 72, which occurs after 1 day.
+For day 6 (72), the next warmer temperature is 76, which occurs after 1 day.
+For day 7 (76), there is no warmer temperature in the future, so output 0.
+For day 8 (73), there is no warmer temperature in the future, so output 0.
+
+Difficulty:
+Medium
+
+Five Test Cases:
+Test Case 1:
+Input:
+5
+70 71 72 73 74
+Output:
+1 1 1 1 0
+
+Test Case 2:
+Input:
+6
+80 79 78 77 76 75
+Output:
+0 0 0 0 0 0
+
+Test Case 3:
+Input:
+7
+73 72 71 72 73 74 75
+Output:
+3 2 1 1 1 1 0
+
+Test Case 4:
+Input:
+4
+90 90 90 90
+Output:
+0 0 0 0
+
+Test Case 5:
+Input:
+10
+60 62 61 63 65 64 66 68 67 70
+Output:
+1 2 1 1 1 1 1 1 1 0
+
+---
+
+Solution Techniques:
+
+1. Brute Force:
+    - For each day, scan forward to find the next warmer temperature.
+    - Time Complexity: O(n^2)
+    - Space Complexity: O(1) (excluding output)
+    - Not efficient for large n.
+
+2. Monotonic Stack:
+    - Use a stack to keep indices of days with unresolved warmer temperatures.
+    - For each day, pop from the stack until the current temperature is not warmer than the temperature at the stack's top index.
+    - For each pop, set the answer for that index as the difference in days.
+    - Time Complexity: O(n)
+    - Space Complexity: O(n)
+    - Efficient and optimal for this problem.
+
+3. Reverse Traversal with Preprocessing:
+    - Traverse from the end, for each temperature, keep track of the next occurrence of each possible temperature.
+    - For each day, check all higher temperatures to find the soonest warmer day.
+    - Time Complexity: O(n * k), where k is the range of temperatures (at most 71).
+    - Space Complexity: O(k)
+    - More efficient than brute force, but not as fast as monotonic stack.
