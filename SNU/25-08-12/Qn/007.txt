@@ -28,7 +28,7 @@ Sample Input:
 2 7 9 3 1 5
 
 Sample Output:
-17
+16
 
 Explanation:
 Rob house 1 (2), house 3 (9), and house 6 (5), total = 2 + 9 + 5 = 16.
@@ -106,7 +106,7 @@ Solution 3: Bottom-Up Dynamic Programming (Tabulation)
 Solution 4: Space Optimized Dynamic Programming
 - Only keep track of last two results instead of full dp array.
 - Use two variables: prev1 (dp[i-1]), prev2 (dp[i-2])
-- For each house: curr = max(prev1, prev2 + nums[i])
+- For each house: curr = max(  , prev2 + nums[i])
 - Update prev2 = prev1, prev1 = curr
 - Time Complexity: O(n)
 - Space Complexity: O(1)

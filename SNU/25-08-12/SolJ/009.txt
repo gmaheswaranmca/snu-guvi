@@ -1,0 +1,120 @@
+import java.util.*;
+
+public class CoinChange {
+
+    // Dynamic Programming (Bottom-Up, Tabulation)
+    public static void coinChangeBottomUp() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] coins = new int[n];
+        for (int i = 0; i < n; i++) coins[i] = sc.nextInt();
+        int amount = sc.nextInt();
+
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+
+        for (int i = 1; i <= amount; i++) {
+            for (int coin : coins) {
+                if (i - coin >= 0 && dp[i - coin] != Integer.MAX_VALUE) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+        System.out.println(dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount]);
+    }
+
+    // Dynamic Programming (Top-Down, Memoization)
+    public static void coinChangeTopDown() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] coins = new int[n];
+        for (int i = 0; i < n; i++) coins[i] = sc.nextInt();
+        int amount = sc.nextInt();
+
+        Map<Integer, Integer> memo = new HashMap<>();
+
+        int ans = dp(amount, coins, memo);
+        System.out.println(ans == Integer.MAX_VALUE ? -1 : ans);
+    }
+
+    private static int dp(int rem, int[] coins, Map<Integer, Integer> memo) {
+        if (rem == 0) return 0;
+        if (rem < 0) return Integer.MAX_VALUE;
+        if (memo.containsKey(rem)) return memo.get(rem);
+
+        int min = Integer.MAX_VALUE;
+        for (int coin : coins) {
+            int res = dp(rem - coin, coins, memo);
+            if (res != Integer.MAX_VALUE) {
+                min = Math.min(min, res + 1);
+            }
+        }
+        memo.put(rem, min);
+        return min;
+    }
+
+    // Breadth-First Search (BFS)
+    public static void coinChangeBFS() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] coins = new int[n];
+        for (int i = 0; i < n; i++) coins[i] = sc.nextInt();
+        int amount = sc.nextInt();
+
+        if (amount == 0) {
+            System.out.println(0);
+            return;
+        }
+
+        Set<Integer> visited = new HashSet<>();
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{0, 0}); // {current_amount, steps}
+
+        while (!queue.isEmpty()) {
+            int[] curr = queue.poll();
+            int currAmt = curr[0], steps = curr[1];
+            for (int coin : coins) {
+                int nextAmt = currAmt + coin;
+                if (nextAmt == amount) {
+                    System.out.println(steps + 1);
+                    return;
+                }
+                if (nextAmt >= 0 && nextAmt <= amount && !visited.contains(nextAmt)) {
+                    visited.add(nextAmt);
+                    queue.offer(new int[]{nextAmt, steps + 1});
+                }
+            }
+        }
+        System.out.println(-1);
+    }
+
+    // Greedy (Not always correct for arbitrary denominations)
+    public static void coinChangeGreedy() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] coins = new int[n];
+        for (int i = 0; i < n; i++) coins[i] = sc.nextInt();
+        int amount = sc.nextInt();
+
+        Arrays.sort(coins);
+        int count = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            int coin = coins[i];
+            if (amount >= coin) {
+                int num = amount / coin;
+                count += num;
+                amount -= num * coin;
+            }
+        }
+        System.out.println(amount == 0 ? count : -1);
+    }
+
+    // Uncomment one of the following to run
+    public static void main(String[] args) {
+        // coinChangeBottomUp();
+        // coinChangeTopDown();
+        // coinChangeBFS();
+        // coinChangeGreedy();
+    }
+}

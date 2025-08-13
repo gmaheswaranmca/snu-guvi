@@ -1,0 +1,183 @@
+"House Robber", 
+"Given an array representing the amount of money in each house, determine the maximum amount you can rob without alerting the police (cannot rob adjacent houses).", 
+"Medium", 
+"LeetCode, InterviewBit"
+"Amazon, Google, Facebook"
+
+---
+
+Best Option:
+- The space optimized dynamic programming approach is best, with O(n) time and O(1) space complexity.
+
+---
+
+# Recursive Solution (Brute Force)
+def max_rob_recursive(nums, i=0):
+    if i >= len(nums):
+        return 0
+    # Option 1: Skip current house
+    skip = max_rob_recursive(nums, i + 1)
+    # Option 2: Rob current house and skip next
+    rob = nums[i] + max_rob_recursive(nums, i + 2)
+    return max(skip, rob)
+
+# Read input
+n = int(input())
+nums = list(map(int, input().split()))
+print(max_rob_recursive(nums))
+
+---
+
+# Top-Down Dynamic Programming (Memoization)
+def max_rob_memo(nums):
+    memo = {}
+
+    def dp(i):
+        if i >= len(nums):
+            return 0
+        if i in memo:
+            return memo[i]
+        skip = dp(i + 1)
+        rob = nums[i] + dp(i + 2)
+        memo[i] = max(skip, rob)
+        return memo[i]
+
+    return dp(0)
+
+# Read input
+n = int(input())
+nums = list(map(int, input().split()))
+print(max_rob_memo(nums))
+
+---
+
+# Bottom-Up Dynamic Programming (Tabulation)
+def max_rob_tabulation(nums):
+    n = len(nums)
+    if n == 0:
+        return 0
+    if n == 1:
+        return nums[0]
+    dp = [0] * n
+    dp[0] = nums[0]
+    dp[1] = max(nums[0], nums[1])
+    for i in range(2, n):
+        dp[i] = max(dp[i - 1], dp[i - 2] + nums[i])
+    return dp[-1]
+
+# Read input
+n = int(input())
+nums = list(map(int, input().split()))
+print(max_rob_tabulation(nums))
+
+---
+
+# Space Optimized Dynamic Programming
+def max_rob_space_optimized(nums):
+    n = len(nums)
+    if n == 0:
+        return 0
+    if n == 1:
+        return nums[0]
+    prev2 = nums[0]
+    prev1 = max(nums[0], nums[1])
+    for i in range(2, n):
+        curr = max(prev1, prev2 + nums[i])
+        prev2 = prev1
+        prev1 = curr
+    return prev1
+
+# Read input
+n = int(input())
+nums = list(map(int, input().split()))
+print(max_rob_space_optimized(nums))
+
+---
+
+# MCQ Questions
+
+# Question 1
+Which of the following best describes the main constraint in the "House Robber" problem?
+A) You cannot rob more than two houses in a row  
+B) You cannot rob adjacent houses  
+C) You must rob at least one house  
+D) You can only rob the first and last house
+
+# Question 2
+What is the time complexity of the brute-force recursive solution for the House Robber problem?
+A) O(n)  
+B) O(log n)  
+C) O(2^n)  
+D) O(n^2)
+
+# Question 3
+Which dynamic programming approach uses the least amount of extra space for the House Robber problem?
+A) Top-Down DP with Memoization  
+B) Bottom-Up DP with Tabulation  
+C) Space Optimized DP  
+D) Brute Force Recursion
+
+# Question 4
+Given the input: 5 3 4 11 2 7 9 3, what is the maximum amount that can be robbed?
+A) 18  
+B) 26  
+C) 23  
+D) 20
+
+# Question 5
+In the space optimized DP solution, which variables are used to keep track of the maximum money robbed so far?
+A) curr and next  
+B) prev1 and prev2  
+C) dp and memo  
+D) max1 and max2
+
+# Question 6
+Which of the following statements is TRUE about the House Robber problem?
+A) It can be solved in O(n^2) time using brute force  
+B) The optimal substructure property applies  
+C) The greedy approach always gives the correct answer  
+D) It cannot be solved using dynamic programming
+
+# Question 7
+If there is only one house with amount 10, what is the output?
+A) 0  
+B) 10  
+C) 5  
+D) 1
+
+# Question 8
+Which recurrence relation correctly models the House Robber problem?
+A) dp[i] = max(dp[i-1], nums[i] + dp[i-2])  
+B) dp[i] = dp[i-1] + nums[i]  
+C) dp[i] = min(dp[i-1], nums[i])  
+D) dp[i] = dp[i-2] - nums[i]
+
+# Question 9
+What is the space complexity of the bottom-up DP (tabulation) approach?
+A) O(1)  
+B) O(n)  
+C) O(log n)  
+D) O(n^2)
+
+# Question 10
+Which companies have asked the House Robber problem in interviews?
+A) Amazon  
+B) Google  
+C) Facebook  
+D) All of the above
+
+---
+
+# Answers
+1. B  
+2. C  
+3. C  
+4. B  
+5. B  
+6. B  
+7. B  
+8. A  
+9. B  
+10. D
+
+---

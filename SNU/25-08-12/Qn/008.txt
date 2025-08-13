@@ -1,0 +1,88 @@
+"Longest Palindromic Substring", 
+"Given a string, find the longest palindromic substring.", 
+"Medium", 
+"LeetCode, GeeksforGeeks"
+"Amazon, Microsoft, Google"
+
+---
+
+Problem Title: Longest Palindromic Substring
+
+Problem Description:
+Given a string s, find the longest substring which is a palindrome. A palindrome is a string that reads the same backward as forward. You need to return the longest palindromic substring present in s. If there are multiple answers, return any one of them.
+
+Input Format:
+- A single line containing the string s.
+
+Output Format:
+- A single line containing the longest palindromic substring.
+
+Constraints:
+- 1 <= s.length <= 1000
+- s consists of only English letters (both lowercase and uppercase) and digits.
+
+Sample Input 1:
+babad
+
+Sample Output 1:
+bab
+
+Sample Explanation 1:
+"bab" is a palindrome substring. "aba" is also a valid answer.
+
+Sample Input 2:
+cbbd
+
+Sample Output 2:
+bb
+
+Sample Explanation 2:
+"bb" is the longest palindromic substring.
+
+Difficulty:
+Medium
+
+Five Test Cases:
+Test Case 1:
+Input: abacdfgdcaba
+Output: aba
+
+Test Case 2:
+Input: racecar
+Output: racecar
+
+Test Case 3:
+Input: a
+Output: a
+
+Test Case 4:
+Input: abcdef
+Output: a
+
+Test Case 5:
+Input: forgeeksskeegfor
+Output: geeksskeeg
+
+---
+
+Solution Techniques for Longest Palindromic Substring:
+
+1. Brute Force:
+    - Check all possible substrings and verify if each is a palindrome.
+    - Time Complexity: O(n^3)
+    - Space Complexity: O(1)
+
+2. Dynamic Programming:
+    - Use a 2D table to store whether s[i:j] is a palindrome.
+    - Time Complexity: O(n^2)
+    - Space Complexity: O(n^2)
+
+3. Expand Around Center:
+    - For each character (and each gap between characters), expand outwards to find palindromes.
+    - Time Complexity: O(n^2)
+    - Space Complexity: O(1)
+
+4. Manacher's Algorithm:
+    - Linear time algorithm using clever preprocessing and symmetry.
+    - Time Complexity: O(n)
+    - Space Complexity: O(n)

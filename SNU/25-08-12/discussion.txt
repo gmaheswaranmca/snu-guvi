@@ -1,0 +1,140 @@
+-- sanskar
+
+class Solution {//Tabulation
+    public int rob(int[] nums) {
+        int size = nums.length;
+        int[] dp = new int[size + 1];
+
+        dp[0] = 0;
+        dp[1] = nums[0];
+
+        for(int index = 2 ; index < dp.length ; index++){
+            int takeMoney = dp[index - 2] + nums[index - 1];
+            int leaveMoney = dp[index - 1] + 0;
+
+            dp[index] = Math.max(takeMoney, leaveMoney);
+        }
+
+        return dp[size];
+    }
+}
+
+class Solution {//mem 
+    public int dpMem(int[] nums, int[] dp, int index, int size){
+        if(index > size - 1){
+            return 0;
+        }
+
+        if(dp[index] != -1){
+            return dp[index];
+        }
+
+        int takeMoney = dpMem(nums, dp, index + 2, size) + nums[index];
+        int leaveMoney = dpMem(nums, dp, index + 1, size) + 0;
+
+        dp[index] = Math.max(takeMoney, leaveMoney);
+
+        return dp[index];
+    }
+
+    public int rob(int[] nums) {
+        int size = nums.length;
+        int[] dp = new int[size];
+        for(int idx = 0 ; idx < size ; idx++){
+            dp[idx] = -1;
+        }
+
+        int maxMoney = dpMem(nums, dp, 0, size);
+        return maxMoney;
+    }
+}
+
+-- arnab
+robber problem via bottom up dp
+
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        n=len(nums)
+        # max_robs calculates max value robbable if ith and later houses existed
+        max_robs=[0]*(n+2)
+
+        for i in range(n-1, -1, -1):
+            rob_current=max_robs[i+2]+nums[i]
+            skip_current=max_robs[i+1]
+            max_robs[i]=max(rob_current, skip_current)
+            
+        return max_robs[0]
+
+
+-- Suryansh Rohil | Greedy approach
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#define log(x) cout << x << endl;
+
+using namespace std;
+
+class Solution {
+public:
+//greedy 
+    int coinChange(vector<int>& coins, int amount) {
+        int result = 0;
+        int count = 0;
+
+        sort(coins.begin(), coins.end());
+        //1 , 2 , 5
+        int size = coins.size();
+        for(int i  = size - 1; i >= 0; i--){
+            count = amount / coins[i];
+            // log(count);
+            result += count;
+            amount -= count * coins[i];
+        }
+        if (amount != 0) return -1;
+        return result;
+    }
+};
+
+int main(){
+    vector<int> coins = {1,2,5};
+    int amount = 11;
+
+    Solution s;
+    log(s.coinChange(coins, amount));
+
+    return 0;
+}
+
+-- Naman 
+class Solution {
+public:
+
+    int minimum(vector <int>& coins, int amount, int index, vector <vector<int>>& dp) {
+        if (amount == 0) return 0;
+        if (index < 0) {
+            return -1;
+        }
+        int take = -1, notake = -1;
+        if (dp[index][amount] != -1) return dp[index][amount];
+
+        if (coins[index] <= amount) {
+            take = minimum(coins, amount - coins[index], index, dp);
+        }
+        notake = minimum(coins, amount, index - 1, dp);
+
+        if (notake == -1 && take == -1) return dp[index][amount] = -1;
+        else if (notake == -1 || take == -1) {
+            if (take == -1) return dp[index][amount] = notake;
+            else return dp[index][amount] = take + 1;
+        }
+        else {
+            return dp[index][amount] = min(take + 1, notake);
+        }
+        
+    }
+
+    int coinChange(vector<int>& coins, int amount) {
+        vector <vector<int>> dp(coins.size(), vector<int>(amount + 1, -1));
+        return minimum(coins, amount, coins.size() - 1, dp);
+    }
+};
