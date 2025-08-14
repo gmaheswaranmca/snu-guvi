@@ -1,0 +1,133 @@
+Best Option:
+The iterative approach is the best for this problem due to its O(n) time and O(1) space complexity.
+
+---
+
+# Definition for singly-linked list node
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def build_linked_list(values):
+    head = ListNode(values[0])
+    curr = head
+    for v in values[1:]:
+        curr.next = ListNode(v)
+        curr = curr.next
+    return head
+
+def reverseList(head):
+    prev = None
+    curr = head
+    while curr:
+        next_node = curr.next
+        curr.next = prev
+        prev = curr
+        curr = next_node
+    return prev
+
+def print_linked_list(head):
+    res = []
+    while head:
+        res.append(str(head.val))
+        head = head.next
+    print(' '.join(res))
+
+if __name__ == "__main__":
+    n = int(input())
+    values = list(map(int, input().split()))
+    head = build_linked_list(values)
+    reversed_head = reverseList(head)
+    print_linked_list(reversed_head)
+
+---
+
+# Recursive Approach
+def reverseListRecursive(head):
+    if not head or not head.next:
+        return head
+    new_head = reverseListRecursive(head.next)
+    head.next.next = head
+    head.next = None
+    return new_head
+
+if __name__ == "__main__":
+    n = int(input())
+    values = list(map(int, input().split()))
+    head = build_linked_list(values)
+    reversed_head = reverseListRecursive(head)
+    print_linked_list(reversed_head)
+
+---
+
+# Using Stack Approach
+def reverseListStack(head):
+    stack = []
+    curr = head
+    while curr:
+        stack.append(curr)
+        curr = curr.next
+    if not stack:
+        return None
+    new_head = stack.pop()
+    curr = new_head
+    while stack:
+        node = stack.pop()
+        curr.next = node
+        curr = node
+    curr.next = None
+    return new_head
+
+if __name__ == "__main__":
+    n = int(input())
+    values = list(map(int, input().split()))
+    head = build_linked_list(values)
+    reversed_head = reverseListStack(head)
+    print_linked_list(reversed_head)
+
+---
+
+# Multiple Choice Questions
+
+1. Which of the following is the most optimal approach to reverse a singly linked list in terms of time and space complexity?
+A) Recursive approach  
+B) Iterative approach  
+C) Using a stack  
+D) Using two linked lists
+
+2. What is the time complexity of the iterative approach to reverse a singly linked list?
+A) O(1)  
+B) O(log n)  
+C) O(n)  
+D) O(n^2)
+
+3. What is the space complexity of the recursive approach to reverse a singly linked list?
+A) O(1)  
+B) O(n)  
+C) O(log n)  
+D) O(n^2)
+
+4. In the iterative approach, what does the 'prev' pointer represent during the reversal process?
+A) The next node to process  
+B) The previous node in the reversed list  
+C) The head of the original list  
+D) The tail of the reversed list
+
+5. Which of the following statements is TRUE about reversing a singly linked list?
+A) The head node always remains the same after reversal  
+B) The reversal can be done in O(1) time  
+C) The reversal requires extra space proportional to the number of nodes if using a stack  
+D) The recursive approach uses less memory than the iterative approach
+
+---
+
+# Answers
+
+1. B) Iterative approach  
+2. C) O(n)  
+3. B) O(n)  
+4. B) The previous node in the reversed list  
+5. C) The reversal requires extra space proportional to the number of nodes if using a stack  
+
+---

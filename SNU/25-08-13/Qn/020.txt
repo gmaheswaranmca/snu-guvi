@@ -1,0 +1,108 @@
+"Valid Parentheses", 
+"Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.", 
+"Easy", 
+"LeetCode, HackerRank"
+"Amazon, Google, Facebook"
+
+---
+
+Problem Title:
+Valid Parentheses
+
+Problem Description:
+Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. An input string is valid if:
+1. Open brackets must be closed by the same type of brackets.
+2. Open brackets must be closed in the correct order.
+3. Every close bracket has a corresponding open bracket of the same type.
+
+Input Format:
+A single line containing a string s consisting only of the characters '(', ')', '{', '}', '[' and ']'.
+
+Output Format:
+Print "true" if the input string is valid, otherwise print "false".
+
+Constraints:
+- 1 <= length of s <= 10^4
+- s consists only of '(', ')', '{', '}', '[' and ']'
+
+Sample Input 1:
+()
+Sample Output 1:
+true
+Explanation:
+The string contains a pair of matching parentheses.
+
+Sample Input 2:
+()[]
+Sample Output 2:
+true
+Explanation:
+The string contains two pairs of matching brackets in correct order.
+
+Sample Input 3:
+(]
+Sample Output 3:
+false
+Explanation:
+The string contains mismatched brackets.
+
+Sample Input 4:
+([{}])
+Sample Output 4:
+true
+Explanation:
+All brackets are correctly matched and nested.
+
+Sample Input 5:
+([)]
+Sample Output 5:
+false
+Explanation:
+Brackets are not closed in the correct order.
+
+Difficulty:
+Easy
+
+Five Test Cases:
+Test Case 1:
+Input: ()
+Output: true
+
+Test Case 2:
+Input: ()[]
+Output: true
+
+Test Case 3:
+Input: (]
+Output: false
+
+Test Case 4:
+Input: ([{}])
+Output: true
+
+Test Case 5:
+Input: ([)]
+Output: false
+
+---
+
+Solution Techniques:
+
+1. Stack-Based Approach:
+    - Use a stack to keep track of opening brackets.
+    - For each character in the string:
+      - If it's an opening bracket, push it onto the stack.
+      - If it's a closing bracket, check if the stack is not empty and the top of the stack is the matching opening bracket. If so, pop it; otherwise, the string is invalid.
+    - At the end, if the stack is empty, the string is valid.
+    - Time Complexity: O(n)
+    - Space Complexity: O(n)
+
+2. String Replacement Approach:
+    - Repeatedly replace pairs of matching brackets ("()", "[]", "{}") with an empty string until no more replacements can be made.
+    - If the resulting string is empty, it's valid.
+    - Time Complexity: O(n^2) (due to repeated string operations)
+    - Space Complexity: O(n)
+
+3. Counter Approach (Not Suitable):
+    - Use counters for each bracket type.
+    - This approach fails for nested and ordered brackets, so it's not suitable for this problem.

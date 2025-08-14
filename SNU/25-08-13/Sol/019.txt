@@ -1,0 +1,298 @@
+Best Option:
+The iterative merge using a dummy node is the best option. It is simple, efficient, and uses O(1) extra space (excluding the output list), with optimal O(n1 + n2) time complexity.
+
+---
+
+# Iterative Merge Using Dummy Node
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def build_linked_list(arr):
+    dummy = ListNode()
+    curr = dummy
+    for num in arr:
+        curr.next = ListNode(num)
+        curr = curr.next
+    return dummy.next
+
+def print_linked_list(head):
+    res = []
+    while head:
+        res.append(str(head.val))
+        head = head.next
+    print(' '.join(res))
+
+def merge_two_lists(l1, l2):
+    dummy = ListNode()
+    curr = dummy
+    while l1 and l2:
+        if l1.val <= l2.val:
+            curr.next = l1
+            l1 = l1.next
+        else:
+            curr.next = l2
+            l2 = l2.next
+        curr = curr.next
+    curr.next = l1 if l1 else l2
+    return dummy.next
+
+def main():
+    n1 = int(input())
+    arr1 = []
+    if n1 > 0:
+        arr1 = list(map(int, input().split()))
+    n2 = int(input())
+    arr2 = []
+    if n2 > 0:
+        arr2 = list(map(int, input().split()))
+    l1 = build_linked_list(arr1)
+    l2 = build_linked_list(arr2)
+    merged = merge_two_lists(l1, l2)
+    print_linked_list(merged)
+
+if __name__ == "__main__":
+    main()
+
+---
+
+# Recursive Merge
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def build_linked_list(arr):
+    dummy = ListNode()
+    curr = dummy
+    for num in arr:
+        curr.next = ListNode(num)
+        curr = curr.next
+    return dummy.next
+
+def print_linked_list(head):
+    res = []
+    while head:
+        res.append(str(head.val))
+        head = head.next
+    print(' '.join(res))
+
+def merge_two_lists_recursive(l1, l2):
+    if not l1:
+        return l2
+    if not l2:
+        return l1
+    if l1.val <= l2.val:
+        l1.next = merge_two_lists_recursive(l1.next, l2)
+        return l1
+    else:
+        l2.next = merge_two_lists_recursive(l1, l2.next)
+        return l2
+
+def main():
+    n1 = int(input())
+    arr1 = []
+    if n1 > 0:
+        arr1 = list(map(int, input().split()))
+    n2 = int(input())
+    arr2 = []
+    if n2 > 0:
+        arr2 = list(map(int, input().split()))
+    l1 = build_linked_list(arr1)
+    l2 = build_linked_list(arr2)
+    merged = merge_two_lists_recursive(l1, l2)
+    print_linked_list(merged)
+
+if __name__ == "__main__":
+    main()
+
+---
+
+# Concatenate and Sort
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def build_linked_list(arr):
+    dummy = ListNode()
+    curr = dummy
+    for num in arr:
+        curr.next = ListNode(num)
+        curr = curr.next
+    return dummy.next
+
+def print_linked_list(head):
+    res = []
+    while head:
+        res.append(str(head.val))
+        head = head.next
+    print(' '.join(res))
+
+def merge_two_lists_concat_sort(l1, l2):
+    vals = []
+    while l1:
+        vals.append(l1.val)
+        l1 = l1.next
+    while l2:
+        vals.append(l2.val)
+        l2 = l2.next
+    vals.sort()
+    return build_linked_list(vals)
+
+def main():
+    n1 = int(input())
+    arr1 = []
+    if n1 > 0:
+        arr1 = list(map(int, input().split()))
+    n2 = int(input())
+    arr2 = []
+    if n2 > 0:
+        arr2 = list(map(int, input().split()))
+    l1 = build_linked_list(arr1)
+    l2 = build_linked_list(arr2)
+    merged = merge_two_lists_concat_sort(l1, l2)
+    print_linked_list(merged)
+
+if __name__ == "__main__":
+    main()
+
+---
+
+# Using Priority Queue (Min-Heap)
+import heapq
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def build_linked_list(arr):
+    dummy = ListNode()
+    curr = dummy
+    for num in arr:
+        curr.next = ListNode(num)
+        curr = curr.next
+    return dummy.next
+
+def print_linked_list(head):
+    res = []
+    while head:
+        res.append(str(head.val))
+        head = head.next
+    print(' '.join(res))
+
+def merge_two_lists_heap(l1, l2):
+    heap = []
+    while l1:
+        heapq.heappush(heap, l1.val)
+        l1 = l1.next
+    while l2:
+        heapq.heappush(heap, l2.val)
+        l2 = l2.next
+    dummy = ListNode()
+    curr = dummy
+    while heap:
+        curr.next = ListNode(heapq.heappop(heap))
+        curr = curr.next
+    return dummy.next
+
+def main():
+    n1 = int(input())
+    arr1 = []
+    if n1 > 0:
+        arr1 = list(map(int, input().split()))
+    n2 = int(input())
+    arr2 = []
+    if n2 > 0:
+        arr2 = list(map(int, input().split()))
+    l1 = build_linked_list(arr1)
+    l2 = build_linked_list(arr2)
+    merged = merge_two_lists_heap(l1, l2)
+    print_linked_list(merged)
+
+if __name__ == "__main__":
+    main()
+
+---
+
+# MCQ Questions
+
+1. Which of the following is the most efficient way to merge two sorted linked lists?
+A) Concatenate both lists and sort the result  
+B) Use a dummy node and iteratively merge nodes  
+C) Insert all nodes into a min-heap and extract in order  
+D) Convert both lists to arrays and merge them  
+
+2. What is the time complexity of the optimal iterative merge solution for merging two sorted linked lists?
+A) O(n1 * n2)  
+B) O(n1 + n2)  
+C) O(n1 log n2)  
+D) O((n1 + n2) log(n1 + n2))  
+
+3. In the recursive merge approach, what is the space complexity (excluding output list)?
+A) O(1)  
+B) O(n1 + n2)  
+C) O(log(n1 + n2))  
+D) O(n1 * n2)  
+
+4. Which of the following is NOT a valid constraint for the "Merge Two Sorted Lists" problem?
+A) The input lists are sorted in non-decreasing order  
+B) Node values can be negative  
+C) The input lists can have cycles  
+D) The number of nodes in each list can be zero  
+
+5. Which companies have frequently asked the "Merge Two Sorted Lists" problem in interviews?
+A) Amazon  
+B) Microsoft  
+C) Facebook  
+D) All of the above  
+
+6. What is the main advantage of using a dummy node in the iterative merge approach?
+A) It increases the speed of merging  
+B) It simplifies handling edge cases at the head of the list  
+C) It reduces the space complexity to O(0)  
+D) It allows merging more than two lists at once  
+
+7. If both input lists are empty, what should the merged list be?
+A) A list with a single node of value 0  
+B) An empty list  
+C) A list with two nodes of value 0  
+D) None of the above  
+
+8. Which data structure is used in the heap-based merge solution?
+A) Stack  
+B) Queue  
+C) Min-Heap  
+D) Binary Search Tree  
+
+9. What is the worst-case time complexity of merging two sorted linked lists using a min-heap?
+A) O(n1 + n2)  
+B) O((n1 + n2) log(n1 + n2))  
+C) O(n1 * n2)  
+D) O(n1 log n2)  
+
+10. Which of the following statements is TRUE about the recursive merge solution?
+A) It uses less memory than the iterative approach  
+B) It may cause stack overflow for very large lists  
+C) It is always faster than the iterative approach  
+D) It cannot handle empty input lists  
+
+---
+
+# Answers
+
+1. B  
+2. B  
+3. B  
+4. C  
+5. D  
+6. B  
+7. B  
+8. C  
+9. B  
+10. B  
+
+---
+

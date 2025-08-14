@@ -1,0 +1,118 @@
+Best Option:
+- The Monotonic Stack approach is the best: O(n) time and O(n) space, and is the standard optimal solution for this problem.
+
+---
+
+# Brute Force Solution
+n = int(input())
+temps = list(map(int, input().split()))
+res = [0] * n
+for i in range(n):
+    for j in range(i + 1, n):
+        if temps[j] > temps[i]:
+            res[i] = j - i
+            break
+print(' '.join(map(str, res)))
+
+---
+
+# Monotonic Stack Solution
+n = int(input())
+temps = list(map(int, input().split()))
+res = [0] * n
+stack = []
+for i, temp in enumerate(temps):
+    while stack and temp > temps[stack[-1]]:
+        idx = stack.pop()
+        res[idx] = i - idx
+    stack.append(i)
+print(' '.join(map(str, res)))
+
+---
+
+# Reverse Traversal with Preprocessing Solution
+n = int(input())
+temps = list(map(int, input().split()))
+res = [0] * n
+next_occurrence = [float('inf')] * 71  # temperatures from 30 to 100
+
+for i in range(n - 1, -1, -1):
+    min_wait = float('inf')
+    for t in range(temps[i] + 1, 101):
+        idx = next_occurrence[t - 30]
+        if idx < min_wait:
+            min_wait = idx
+    if min_wait < float('inf'):
+        res[i] = min_wait - i
+    next_occurrence[temps[i] - 30] = i
+
+print(' '.join(map(str, res)))
+
+---
+
+# MCQ Questions
+
+1. Which data structure is most suitable for solving the "Daily Temperatures" problem in O(n) time?
+A) Queue  
+B) Stack  
+C) Linked List  
+D) Heap  
+
+2. What does the output represent in the "Daily Temperatures" problem?
+A) The maximum temperature for each day  
+B) The number of days until a warmer temperature  
+C) The minimum temperature for each day  
+D) The sum of temperatures up to that day  
+
+3. What is the time complexity of the brute force solution for the "Daily Temperatures" problem?
+A) O(n)  
+B) O(log n)  
+C) O(n^2)  
+D) O(1)  
+
+4. In the monotonic stack approach, what does the stack store?
+A) Temperatures  
+B) Indices of unresolved days  
+C) Number of warmer days  
+D) None of the above  
+
+5. For the reverse traversal with preprocessing solution, what is the maximum possible size of the auxiliary array used for next occurrences?
+A) n  
+B) 71  
+C) 100  
+D) 30  
+
+6. If all temperatures are the same for n days, what will the output be?
+A) All 1s  
+B) All 0s  
+C) Increasing sequence  
+D) Decreasing sequence  
+
+7. Which of the following is NOT a valid constraint for the "Daily Temperatures" problem?
+A) 1 <= n <= 10^5  
+B) 30 <= temperature[i] <= 100  
+C) n can be negative  
+D) Temperatures are integers  
+
+8. Which company is NOT mentioned as having asked this problem?
+A) Amazon  
+B) Google  
+C) Microsoft  
+D) Facebook  
+
+---
+
+# Answers
+
+1. B) Stack  
+2. B) The number of days until a warmer temperature  
+3. C) O(n^2)  
+4. B) Indices of unresolved days  
+5. B) 71  
+6. B) All 0s  
+7. C) n can be negative  
+8. D) Facebook  
+
+---
+
+

@@ -1,0 +1,26 @@
+o Linked List 
+"Reverse Linked List", 
+"Reverse a singly linked list.", 
+"Easy", 
+"LeetCode, GeeksforGeeks"
+"Amazon, Microsoft, Google"
+
+===
+
+"Linked List Cycle", 
+"Given a linked list, determine if it has a cycle.", 
+"Easy", 
+"LeetCode, InterviewBit"
+"Amazon, Google, Microsoft"
+
+---
+
+o Stack 
+
+"Valid Parentheses", 
+"Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.", 
+"Easy", 
+"LeetCode, HackerRank"
+"Amazon, Google, Facebook"
+
+===

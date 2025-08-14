@@ -1,0 +1,121 @@
+Best Option:
+The stack-based approach is the most efficient and reliable solution for this problem, with O(n) time and space complexity.
+
+---
+
+give me solution in python for above problem Using Stack-Based Approach
+give me solution in python for above problem Using String Replacement Approach
+give me solution in python for above problem Using Counter Approach (Not Suitable)
+
+---
+
+# Stack-Based Approach
+def isValid(s):
+    stack = []
+    bracket_map = {')': '(', '}': '{', ']': '['}
+    for char in s:
+        if char in bracket_map.values():
+            stack.append(char)
+        elif char in bracket_map:
+            if not stack or stack[-1] != bracket_map[char]:
+                return False
+            stack.pop()
+    return not stack
+
+# Read input
+s = input().strip()
+print(str(isValid(s)).lower())
+
+---
+
+# String Replacement Approach
+def isValid_replacement(s):
+    prev = None
+    while prev != s:
+        prev = s
+        s = s.replace('()', '').replace('[]', '').replace('{}', '')
+    return s == ''
+
+# Read input
+s = input().strip()
+print(str(isValid_replacement(s)).lower())
+
+---
+
+# Counter Approach (Not Suitable)
+def isValid_counter(s):
+    count_paren = count_brace = count_bracket = 0
+    for char in s:
+        if char == '(':
+            count_paren += 1
+        elif char == ')':
+            count_paren -= 1
+            if count_paren < 0:
+                return False
+        elif char == '{':
+            count_brace += 1
+        elif char == '}':
+            count_brace -= 1
+            if count_brace < 0:
+                return False
+        elif char == '[':
+            count_bracket += 1
+        elif char == ']':
+            count_bracket -= 1
+            if count_bracket < 0:
+                return False
+    return count_paren == 0 and count_brace == 0 and count_bracket == 0
+
+# Read input
+s = input().strip()
+print(str(isValid_counter(s)).lower())
+
+---
+
+# MCQ Questions
+
+# Question 1
+Which data structure is most suitable for checking the validity of parentheses in a string?
+A) Queue  
+B) Stack  
+C) Linked List  
+D) Heap  
+
+# Question 2
+What is the time complexity of the stack-based approach for the Valid Parentheses problem?
+A) O(1)  
+B) O(log n)  
+C) O(n)  
+D) O(n^2)  
+
+# Question 3
+Why is the counter approach not suitable for solving the Valid Parentheses problem?
+A) It uses too much memory  
+B) It cannot handle nested and ordered brackets  
+C) It is too slow  
+D) It is not implemented in Python  
+
+# Question 4
+Which of the following input strings is valid according to the problem statement?
+A) ([)]  
+B) (({[]}))  
+C) (]  
+D) ([{])  
+
+# Question 5
+What will be the output for the input string "([]{})" using the stack-based approach?
+A) true  
+B) false  
+C) error  
+D) none  
+
+---
+
+# Answers
+1. B) Stack  
+2. C) O(n)  
+3. B) It cannot handle nested and ordered brackets  
+4. B) (({[]}))  
+5. A) true  
+
+---

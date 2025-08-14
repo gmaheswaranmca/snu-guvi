@@ -1,0 +1,17 @@
+o Linked List
+
+"Merge Two Sorted Lists", 
+"Merge two sorted linked lists and return it as a new sorted list.", 
+"Easy", 
+"LeetCode, GeeksforGeeks"
+"Amazon, Microsoft, Facebook"
+
+===
+
+o Stack
+
+"Daily Temperatures", 
+"Given a list of daily temperatures, return a list such that for each day, tells you how many days you would have to wait until a warmer temperature.", 
+"Medium", 
+"LeetCode, InterviewBit"
+"Amazon, Google, Microsoft"
