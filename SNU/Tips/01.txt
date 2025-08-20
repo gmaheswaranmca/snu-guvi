@@ -1,0 +1,66 @@
+Arrays / Two Pointers / Hashing
+1. "3Sum", "Given an array of integers, find all unique triplets that sum up to zero.", "Medium", "LeetCode, InterviewBit / Google, Facebook, Amazon, Microsoft"
+  3Sum: https://lnkd.in/gev7gEzS
+2. "Container With Most Water", "Given n non-negative integers representing the heights of vertical lines, find two lines that together with the x-axis form a container, such that the container contains the most water.", "Medium", "LeetCode, HackerRank / Google, Amazon, Apple"
+  Container With Most Water: https://lnkd.in/gY2vxRMn
+3. "Longest Consecutive Sequence", "Given an unsorted array of integers, find the length of the longest consecutive elements sequence.", "Hard", "LeetCode, GeeksforGeeks / Google, Facebook, Amazon"
+  Longest Consecutive Sequence: https://lnkd.in/gMWgaJhS
+===
+Strings  
+4. "Longest Substring Without Repeating Characters", "Given a string, find the length of the longest substring without repeating characters.", "Medium", "LeetCode, HackerRank / Google, Amazon, Microsoft"
+  Longest Substring Without Repeating Characters: https://lnkd.in/gCPCfm89
+5. "Minimum Window Substring", "Given two strings s and t, return the minimum window in s which will contain all the characters in t.", "Hard", "LeetCode, InterviewBit / Facebook, Amazon, Microsoft"
+  Minimum Window Substring: https://lnkd.in/gHn6tqru
+===
+Dynamic Programming (DP)
+6. "Climbing Stairs", "Given n steps, each time you can climb 1 or 2 steps. Find how many distinct ways you can climb to the top.", "Easy", "LeetCode, GeeksforGeeks / Amazon, Microsoft"
+  Climbing Stairs: https://lnkd.in/gMAZA-aw
+7. "House Robber", "Given an array representing the amount of money in each house, determine the maximum amount you can rob without alerting the police (cannot rob adjacent houses).", "Medium", "LeetCode, InterviewBit / Amazon, Google, Facebook"
+  House Robber: https://lnkd.in/g2a7USsS
+8. "Longest Palindromic Substring", "Given a string, find the longest palindromic substring.", "Medium", "LeetCode, GeeksforGeeks / Amazon, Microsoft, Google"
+  Longest Palindromic Substring: https://lnkd.in/gKW4rFzN
+9. "Coin Change", "Given coins of different denominations and a total amount, compute the fewest number of coins needed to make up that amount.", "Medium", "LeetCode, HackerRank / Amazon, Google, Apple"
+  Coin Change: https://lnkd.in/ggfk-rKw
+10. "Partition Equal Subset Sum", "Given a non-empty array, determine if it can be partitioned into two subsets with equal sum.", "Medium", "LeetCode, InterviewBit / Amazon, Google, Facebook"
+  Partition Equal Subset Sum: https://lnkd.in/guvDMreS
+===
+Trees / Binary Trees / BST
+11. "Binary Tree Level Order Traversal", "Given a binary tree, return the level order traversal of its nodes' values.", "Medium", "LeetCode, GeeksforGeeks / Amazon, Microsoft, Google"
+  Binary Tree Level Order Traversal: https://lnkd.in/gfdAa3qW
+12. "Diameter of Binary Tree", "Given a binary tree, find the length of the longest path between any two nodes.", "Easy", "LeetCode, InterviewBit / Amazon, Microsoft"
+  Diameter of Binary Tree: https://lnkd.in/gJE6Rf3c
+13. "Lowest Common Ancestor of a BST", "Given a binary search tree and two nodes, find their lowest common ancestor.", "Medium", "LeetCode, GeeksforGeeks / Google, Facebook, Amazon"
+  Lowest Common Ancestor of a BST: https://lnkd.in/gaPQwZP7
+
+Backtracking
+14. "Subsets", "Given a set of distinct integers, return all possible subsets.", "Medium", "LeetCode, InterviewBit / Facebook, Google, Amazon"
+  Subsets: https://lnkd.in/gX9kHr7g
+15. "Combination Sum", "Given a set of candidate numbers and a target, find all unique combinations where the candidate numbers sum to the target.", "Medium", "LeetCode, GeeksforGeeks / Amazon, Google, Facebook"
+  Combination Sum: https://lnkd.in/gPa3pd_R
+16. "Word Search", "Given a 2D board and a word, check if the word exists in the grid.", "Medium", "LeetCode, InterviewBit / Google, Facebook, Microsoft"
+  Word Search: https://lnkd.in/gtAvSg9P
+===
+Linked List
+17. "Reverse Linked List", "Reverse a singly linked list.", "Easy", "LeetCode, GeeksforGeeks / Amazon, Microsoft, Google"
+  Reverse Linked List: https://lnkd.in/g-rU_g2i
+18. "Linked List Cycle", "Given a linked list, determine if it has a cycle.", "Easy", "LeetCode, InterviewBit / Amazon, Google, Microsoft"
+  Linked List Cycle: https://lnkd.in/g4jxKvVb
+19. "Merge Two Sorted Lists", "Merge two sorted linked lists and return it as a new sorted list.", "Easy", "LeetCode, GeeksforGeeks / Amazon, Microsoft, Facebook"
+  Merge Two Sorted Lists: https://lnkd.in/gDwNRASd
+===
+Stack
+20. "Valid Parentheses", "Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.", "Easy", "LeetCode, HackerRank / Amazon, Google, Facebook"
+  Valid Parentheses: https://lnkd.in/gNX7aNsz
+21. "Daily Temperatures", "Given a list of daily temperatures, return a list such that for each day, tells you how many days you would have to wait until a warmer temperature.", "Medium", "LeetCode, InterviewBit / Amazon, Google, Microsoft"
+  Daily Temperatures: https://lnkd.in/gc-GC4iq
+===
+Graphs / BFS / DFS / Union-Find
+22. "Number of Islands", "Given a 2D grid map of '1's (land) and '0's (water), count the number of islands.", "Medium", "LeetCode, GeeksforGeeks / Amazon, Google, Facebook"
+  Number of Islands: https://lnkd.in/g7gxPyqP
+23. "Clone Graph", "Given a reference of a node in a connected undirected graph, return a deep copy (clone) of the graph.", "Medium", "LeetCode, InterviewBit / Google, Facebook, Amazon"
+  Clone Graph: https://lnkd.in/gd5-Xrrf
+24. "Course Schedule", "Given the total number of courses and a list of prerequisite pairs, determine if you can finish all courses.", "Medium", "LeetCode, GeeksforGeeks / Google, Facebook, Amazon"
+  Course Schedule: https://lnkd.in/gMtQhFeM
+25. "Redundant Connection", "In a tree with N nodes, one additional edge is added. Find the edge that can be removed so that the resulting graph is a tree.", "Medium", "LeetCode, InterviewBit / Google, Facebook, Amazon"
+  Redundant Connection: https://lnkd.in/gNYT4EFR
+===
